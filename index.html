@@ -81,9 +81,9 @@
 
         // Загрузка всех таблиц и их объединение
         Promise.all([
-            loadTable('table1.html').then(content => `<div class="table1"><h2>Table 1</h2><table class="table">${content}</table></div>`),
-            loadTable('table2.html').then(content => `<div class="table2"><h2>Table 2</h2><table class="table">${content}</table></div>`),
-            loadTable('table3.html').then(content => `<div class="table3"><h2>Table 3</h2><table class="table">${content}</table></div>`)
+            loadTable('table1.html').then(content => `<div class="table1"><table class="table">${content}</table></div>`),
+            loadTable('table2.html').then(content => `<div class="table2"><table class="table">${content}</table></div>`),
+            loadTable('table3.html').then(content => `<div class="table3"><table class="table">${content}</table></div>`)
         ]).then(tables => {
             document.getElementById('combinedTables').innerHTML = tables.join(''); // Объединяем таблицы без пробелов
         });
