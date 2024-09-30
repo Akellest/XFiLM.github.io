@@ -33,7 +33,7 @@
         }
 
         Promise.all([
-			loadTable('header.html').then(content => `<div class="header-table">${content}</div>`),
+			loadTable('table-header.html').then(content => `<div class="header-table">${content}</div>`),
 			loadTable('table1.html').then(content => `<div class="table1 table">${content}</div>`),
 			loadTable('table2.html').then(content => `<div class="table2 table">${content}</div>`),
 			loadTable('table3.html').then(content => `<div class="table3 table">${content}</div>`)
