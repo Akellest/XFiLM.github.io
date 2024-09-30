@@ -58,9 +58,9 @@
     font-family: 'SPQR', sans-serif;
 }
 
-.table td, .table th, .header-table th {
+.table td, .header-table th {
     border: 2px solid;
-    /*padding: 10px;*/
+    padding: 10px;
     text-align: center;
     vertical-align: middle;
 }
