@@ -19,6 +19,26 @@
             text-align: center;
             vertical-align: middle;
         }
+		
+		.first-column {
+        width: 30%;
+		}
+		
+		.second-column {
+        width: 20%;
+		}
+		
+		.third-column {
+        width: 30%;
+		}
+		
+		.fourth-column {
+        width: 10%;
+		}
+		
+		.fifth-column {
+        width: 10%;
+		}
 
         /* Стили для каждой таблицы */
         .table1 td {
@@ -39,7 +59,6 @@
     <div id="combinedTables"></div> <!-- Контейнер для объединенных таблиц -->
 
     <script>
-        // Функция для загрузки HTML-содержимого
         function loadTable(filename) {
             return fetch(filename)
                 .then(response => response.text())
@@ -52,7 +71,7 @@
                     const tableContent = doc.querySelector('table').innerHTML;
 
                     // Удаляем пустые строки
-                    const filteredContent = tableContent.replace(/<tr>\s*<td>\s*<\/td>\s*<\/tr>/g, '');
+                    //const filteredContent = tableContent.replace(/<tr>\s*<td>\s*<\/td>\s*<\/tr>/g, '');
 
                     return filteredContent;
                 })
@@ -61,9 +80,9 @@
 
         // Загрузка всех таблиц и их объединение
         Promise.all([
-            loadTable('table1.html').then(content => `<div class="table1"><h2>Table 1</h2><table class="table">${content}</table></div>`),
-            loadTable('table2.html').then(content => `<div class="table2"><h2>Table 2</h2><table class="table">${content}</table></div>`),
-            loadTable('table3.html').then(content => `<div class="table3"><h2>Table 3</h2><table class="table">${content}</table></div>`)
+            loadTable('table1.html').then(content => `<div class="table1"><table class="table">${content}</table></div>`),
+            loadTable('table2.html').then(content => `<div class="table2"><table class="table">${content}</table></div>`),
+            loadTable('table3.html').then(content => `<div class="table3"><table class="table">${content}</table></div>`)
         ]).then(tables => {
             document.getElementById('combinedTables').innerHTML = tables.join(''); // Объединяем таблицы без пробелов
         });
