@@ -60,24 +60,26 @@
 
     <script>
         // Функция для загрузки HTML-содержимого
-        function loadTable(filename) {
-            return fetch(filename)
-                .then(response => response.text())
-                .then(data => {
-                    // Преобразуем текст в HTML и фильтруем пустые строки
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(data, 'text/html');
+        // Функция для загрузки HTML-содержимого
+function loadTable(filename) {
+    return fetch(filename)
+        .then(response => response.text())
+        .then(data => {
+            // Преобразуем текст в HTML и фильтруем пустые строки
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
 
-                    // Получаем таблицу
-                    const tableContent = doc.querySelector('table').innerHTML;
+            // Получаем таблицу
+            const tableContent = doc.querySelector('table').innerHTML;
 
-                    // Удаляем пустые строки
-                    const filteredContent = tableContent.replace(/<tr>\s*<td>\s*<\/td>\s*<\/tr>/g, '');
+            // Выводим в консоль содержимое таблицы
+            console.log(`Загруженная таблица из ${filename}:\n`, tableContent);
 
-                    return filteredContent;
-                })
-                .catch(error => console.error('Ошибка загрузки таблицы:', error));
-        }
+            return tableContent;
+        })
+        .catch(error => console.error('Ошибка загрузки таблицы:', error));
+}
+
 
         // Загрузка всех таблиц и их объединение
         Promise.all([
