@@ -47,7 +47,7 @@
     font-style: normal;
 }
 
-table {
+.table {
     border-collapse: collapse;
     width: 100%; /* Занять всю ширину контейнера */
     margin-bottom: 0px;
@@ -74,7 +74,7 @@ table {
 }
 
 .third-column {
-    font-family: 'AdobeJenson', sans-serif; /* Убрали одну точку с запятой */
+    font-family: 'AdobeJenson', sans-serif;
     font-weight: bold;
     font-style: normal;
     width: 30%;
