@@ -58,7 +58,7 @@ table {
     font-family: 'SPQR', sans-serif;
 }
 
-.table td, .table th {
+.table td, .table th, .header-table th {
     border: 2px solid;
     padding: 10px;
     text-align: center;
