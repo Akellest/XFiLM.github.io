@@ -5,8 +5,6 @@
 layout: Note
 ---
 
-# XFiLM.github.io
-
 **DATVM:**
 
 **19.06.2019 — 25.06.2024**
