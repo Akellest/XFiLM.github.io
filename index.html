@@ -72,7 +72,7 @@
                     const tableContent = doc.querySelector('table').innerHTML;
 
                     // Удаляем пустые строки
-                    //const filteredContent = tableContent.replace(/<tr>\s*<td>\s*<\/td>\s*<\/tr>/g, '');
+                    const filteredContent = tableContent.replace(/<tr>\s*<td>\s*<\/td>\s*<\/tr>/g, '');
 
                     return filteredContent;
                 })
