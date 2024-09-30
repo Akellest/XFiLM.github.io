@@ -48,7 +48,7 @@
 }
 
 .table, .header-table {
-    /*border-collapse: collapse;*/
+    border-collapse: collapse;
     width: 100%;
     margin-bottom: 0px;
     margin-top: 0px;
@@ -58,9 +58,9 @@
     font-family: 'SPQR', sans-serif;
 }
 
-.table td, .header-table th {
+.table td, .header-table td {
     border: 2px solid;
-    /*padding: 10px;*/
+    padding: 10px;
     text-align: center;
     vertical-align: middle;
 }
@@ -88,7 +88,6 @@
     width: 10%;
 }
 
-/* Стили для каждой таблицы */
 .table1 td {
     border-color: #CC0000; /* Цвет границы для первой таблицы */
 }
