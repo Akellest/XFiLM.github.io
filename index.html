@@ -38,24 +38,35 @@
 
     <div class="table1">
         <h2>Table 1</h2>
-        <table class="table"> <!-- Применяем общий стиль -->
-            <?php include 'table1.html'; ?>
-        </table>
+        <table class="table" id="table1"></table> <!-- Применяем общий стиль -->
     </div>
 
     <div class="table2">
         <h2>Table 2</h2>
-        <table class="table"> <!-- Применяем общий стиль -->
-            <?php include 'table2.html'; ?>
-        </table>
+        <table class="table" id="table2"></table> <!-- Применяем общий стиль -->
     </div>
 
     <div class="table3">
         <h2>Table 3</h2>
-        <table class="table"> <!-- Применяем общий стиль -->
-            <?php include 'table3.html'; ?>
-        </table>
+        <table class="table" id="table3"></table> <!-- Применяем общий стиль -->
     </div>
+
+    <script>
+        // Функция для загрузки HTML-содержимого
+        function loadTable(tableId, filename) {
+            fetch(filename)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(tableId).innerHTML = data;
+                })
+                .catch(error => console.error('Ошибка загрузки таблицы:', error));
+        }
+
+        // Загрузка содержимого таблиц
+        loadTable('table1', 'table1.html');
+        loadTable('table2', 'table2.html');
+        loadTable('table3', 'table3.html');
+    </script>
 
 </body>
 </html>
