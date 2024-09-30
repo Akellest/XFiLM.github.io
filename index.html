@@ -4,54 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Combined Tables</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Общий стиль для таблиц -->
-    <style>
-        /* Общий стиль для всех таблиц */
-        .table {
-            border-collapse: collapse;
-            width: 100%; /* Занять всю ширину контейнера */
-            margin-bottom: 0px;
-			margin-top: 0px;
-        }
-
-        .table td, .table th {
-            border: 2px solid;
-            padding: 10px;
-            text-align: center;
-            vertical-align: middle;
-        }
-		
-		.first-column {
-        width: 30%;
-		}
-		
-		.second-column {
-        width: 20%;
-		}
-		
-		.third-column {
-        width: 30%;
-		}
-		
-		.fourth-column {
-        width: 10%;
-		}
-		
-		.fifth-column {
-        width: 10%;
-		}
-
-        /* Стили для каждой таблицы */
-        .table1 td {
-            border-color: #CC0000; /* Цвет границы для первой таблицы */
-        }
-        .table2 td {
-            border-color: #CEE2F3; /* Цвет границы для второй таблицы */
-        }
-        .table3 td {
-            border-color: #4986E8; /* Цвет границы для третьей таблицы */
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -82,6 +35,7 @@
 
         // Загрузка всех таблиц и их объединение
         Promise.all([
+			loadTable('header.html').then(content => `<div class="header"><table class="header-table">${content}</table></div>`),
             loadTable('table1.html').then(content => `<div class="table1"><table class="table">${content}</table></div>`),
             loadTable('table2.html').then(content => `<div class="table2"><table class="table">${content}</table></div>`),
             loadTable('table3.html').then(content => `<div class="table3"><table class="table">${content}</table></div>`)
