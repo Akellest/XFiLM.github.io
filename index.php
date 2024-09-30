@@ -17,7 +17,7 @@
             border: 2px solid;
             padding: 10px;
             text-align: center;
-			vertical-align: middle;
+            vertical-align: middle;
         }
 
         /* Стили для каждой таблицы */
@@ -39,7 +39,6 @@
     <div class="table1">
         <h2>Table 1</h2>
         <table class="table"> <!-- Применяем общий стиль -->
-            <!-- Вставьте содержимое table1.html -->
             <?php include 'table1.html'; ?>
         </table>
     </div>
