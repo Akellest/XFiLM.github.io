@@ -15,14 +15,14 @@
 @font-face {
     font-family: 'AdobeJenson';
     src: url('fonts/AJensonPro-Lt.ttf') format('truetype');
-    font-weight: 300;
+    font-weight: 300; /* Легкий шрифт */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'AdobeJenson';
     src: url('fonts/AJensonPro-LtIt.ttf') format('truetype');
-    font-weight: bold;
+    font-weight: bold; /* Убедитесь, что это корректно */
     font-style: italic;
 }
 
@@ -45,56 +45,58 @@
     src: url('fonts/spq.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-}.
-
-table {
-border-collapse: collapse;
-width: 100%; /* Занять всю ширину контейнера */
-margin-bottom: 0px;
-margin-top: 0px;
 }
 
-.header-table th (
-font-family: 'SPQR', sans-serif;
-)
+table {
+    border-collapse: collapse;
+    width: 100%; /* Занять всю ширину контейнера */
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.header-table th {
+    font-family: 'SPQR', sans-serif;
+}
 
 .table td, .table th {
-border: 2px solid;
-padding: 10px;
-text-align: center;
-vertical-align: middle;
+    border: 2px solid;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .first-column {
-width: 30%;
+    width: 30%;
 }
 
 .second-column {
-width: 20%;
+    width: 20%;
 }
 
 .third-column {
-font-family: 'AdobeJenson', sans-serif;;
-font-weight: bold;
-font-style: normal;
-width: 30%;
+    font-family: 'AdobeJenson', sans-serif; /* Убрали одну точку с запятой */
+    font-weight: bold;
+    font-style: normal;
+    width: 30%;
 }
 
 .fourth-column {
-width: 10%;
+    width: 10%;
 }
 
 .fifth-column {
-width: 10%;
+    width: 10%;
 }
 
 /* Стили для каждой таблицы */
 .table1 td {
-border-color: #CC0000; /* Цвет границы для первой таблицы */
+    border-color: #CC0000; /* Цвет границы для первой таблицы */
 }
+
 .table2 td {
-border-color: #CEE2F3; /* Цвет границы для второй таблицы */
+    border-color: #CEE2F3; /* Цвет границы для второй таблицы */
 }
+
 .table3 td {
-border-color: #4986E8; /* Цвет границы для третьей таблицы */
+    border-color: #4986E8; /* Цвет границы для третьей таблицы */
 }
