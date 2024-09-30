@@ -68,7 +68,6 @@
 					// Удаляем пустые строки
 					const filteredContent = tableContent.replace(/<tr>\s*<td>\s*<\/td>\s*<\/tr>/g, '');
 
-					// Вставляем отфильтрованное содержимое в таблицу
 					document.getElementById(tableId).innerHTML = filteredContent;
 				})
 				.catch(error => console.error('Ошибка загрузки таблицы:', error));
