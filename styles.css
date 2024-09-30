@@ -15,14 +15,14 @@
 @font-face {
     font-family: 'AdobeJenson';
     src: url('fonts/AJensonPro-Lt.ttf') format('truetype');
-    font-weight: 300; /* Легкий шрифт */
+    font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'AdobeJenson';
     src: url('fonts/AJensonPro-LtIt.ttf') format('truetype');
-    font-weight: bold; /* Убедитесь, что это корректно */
+    font-weight: bold;
     font-style: italic;
 }
 
@@ -47,9 +47,9 @@
     font-style: normal;
 }
 
-.table {
+.table, .header-table {
     border-collapse: collapse;
-    width: 100%; /* Занять всю ширину контейнера */
+    width: 100%;
     margin-bottom: 0px;
     margin-top: 0px;
 }
@@ -60,7 +60,7 @@
 
 .table td, .table th, .header-table th {
     border: 2px solid;
-    padding: 10px;
+    /*padding: 10px;*/
     text-align: center;
     vertical-align: middle;
 }
