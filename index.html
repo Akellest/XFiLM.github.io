@@ -59,44 +59,35 @@
     <div id="combinedTables"></div> <!-- Контейнер для объединенных таблиц -->
 
     <script>
-    // Функция для загрузки HTML-содержимого
-    function loadTable(filename) {
-        return fetch(filename)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Ошибка HTTP: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                // Преобразуем текст в HTML
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(data, 'text/html');
+        // Функция для загрузки HTML-содержимого
+        function loadTable(filename) {
+            return fetch(filename)
+                .then(response => response.text())
+                .then(data => {
+                    // Преобразуем текст в HTML и фильтруем пустые строки
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
 
-                // Получаем таблицу
-                const tableElement = doc.querySelector('table');
-                
-                // Если таблица найдена, возвращаем её как HTML
-                if (tableElement) {
-                    return tableElement.outerHTML; // Возвращаем всю таблицу, включая классы
-                } else {
-                    console.error(`Таблица не найдена в файле: ${filename}`);
-                    return '';
-                }
-            })
-            .catch(error => console.error('Ошибка загрузки таблицы:', error));
-    }
+                    // Получаем таблицу
+                    const tableContent = doc.querySelector('table').innerHTML;
 
-    // Загрузка всех таблиц и их объединение
-    Promise.all([
-        loadTable('table1.html').then(content => `<div class="table1">${content}</div>`),
-        loadTable('table2.html').then(content => `<div class="table2">${content}</div>`),
-        loadTable('table3.html').then(content => `<div class="table3">${content}</div>`)
-    ]).then(tables => {
-        document.getElementById('combinedTables').innerHTML = tables.join(''); // Объединяем таблицы без пробелов
-    });
-</script>
+                    // Удаляем пустые строки
+                    const filteredContent = tableContent.replace(/<tr>\s*<td>\s*<\/td>\s*<\/tr>/g, '');
 
+                    return filteredContent;
+                })
+                .catch(error => console.error('Ошибка загрузки таблицы:', error));
+        }
+
+        // Загрузка всех таблиц и их объединение
+        Promise.all([
+            loadTable('table1.html').then(content => `<div class="table1"><table class="table">${content}</table></div>`),
+            loadTable('table2.html').then(content => `<div class="table2"><table class="table">${content}</table></div>`),
+            loadTable('table3.html').then(content => `<div class="table3"><table class="table">${content}</table></div>`)
+        ]).then(tables => {
+            document.getElementById('combinedTables').innerHTML = tables.join(''); // Объединяем таблицы без пробелов
+        });
+    </script>
 
 </body>
 </html>
