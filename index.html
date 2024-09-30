@@ -53,14 +53,27 @@
 
     <script>
         // Функция для загрузки HTML-содержимого
-        function loadTable(tableId, filename) {
-            fetch(filename)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(tableId).innerHTML = data;
-                })
-                .catch(error => console.error('Ошибка загрузки таблицы:', error));
-        }
+        // Функция для загрузки HTML-содержимого
+		function loadTable(tableId, filename) {
+			fetch(filename)
+				.then(response => response.text())
+				.then(data => {
+					// Преобразуем текст в HTML и фильтруем пустые строки
+					const parser = new DOMParser();
+					const doc = parser.parseFromString(data, 'text/html');
+
+					// Получаем таблицу
+					const tableContent = doc.querySelector('table').innerHTML;
+
+					// Удаляем пустые строки
+					const filteredContent = tableContent.replace(/<tr>\s*<td>\s*<\/td>\s*<\/tr>/g, '');
+
+					// Вставляем отфильтрованное содержимое в таблицу
+					document.getElementById(tableId).innerHTML = filteredContent;
+				})
+				.catch(error => console.error('Ошибка загрузки таблицы:', error));
+		}
+
 
         loadTable('table1', 'table1.html');
         loadTable('table2', 'table2.html');
