@@ -17,7 +17,6 @@
             return fetch(filename)
                 .then(response => response.text())
                 .then(data => {
-
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(data, 'text/html');
                     const tableElement = doc.querySelector('table');
@@ -33,13 +32,13 @@
         }
 
         Promise.all([
-			loadTable('table-header.html').then(content => `<div class="header-table">${content}</div>`),
-			loadTable('table1.html').then(content => `<div class="table1">${content}</div>`),
-			loadTable('table2.html').then(content => `<div class="table2">${content}</div>`),
-			loadTable('table3.html').then(content => `<div class="table3">${content}</div>`)
-		]).then(tables => {
-			document.getElementById('combinedTables').innerHTML = tables.join(''); // Объединяем таблицы без пробелов
-		});
+            loadTable('table-header.html').then(content => `<div class="header-table">${content}</div>`),
+            loadTable('table1.html').then(content => `<div class="table1 table">${content}</div>`),
+            loadTable('table2.html').then(content => `<div class="table2 table">${content}</div>`),
+            loadTable('table3.html').then(content => `<div class="table3 table">${content}</div>`)
+        ]).then(tables => {
+            document.getElementById('combinedTables').innerHTML = tables.join('');
+        });
     </script>
 </body>
 </html>

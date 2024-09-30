@@ -50,11 +50,13 @@
 .table, .header-table {
     border-collapse: collapse;
     width: 100%;
-    margin-bottom: 0px;
-    margin-top: 0px;
+    /*margin-bottom: 0px;
+    margin-top: 0px;*/
+	margin: 0;
 }
 
 .header-table td {
+	border: 2px solid;
     font-family: 'SPQR', sans-serif;
 }
 
