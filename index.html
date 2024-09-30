@@ -10,19 +10,16 @@
 
     <h1>Combined Tables</h1>
 
-    <div id="combinedTables"></div> <!-- Контейнер для объединенных таблиц -->
+    <div id="combinedTables"></div>
 
     <script>
-        // Функция для загрузки HTML-содержимого
         function loadTable(filename) {
             return fetch(filename)
                 .then(response => response.text())
                 .then(data => {
-                    // Преобразуем текст в HTML
+
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(data, 'text/html');
-
-                    // Получаем таблицу
                     const tableElement = doc.querySelector('table');
 
                     if (!tableElement) {
@@ -30,13 +27,11 @@
                         return '';
                     }
 
-                    // Возвращаем таблицу, включая внутренние элементы
                     return tableElement.outerHTML;
                 })
                 .catch(error => console.error('Ошибка загрузки таблицы:', error));
         }
 
-        // Загрузка всех таблиц и их объединение
         Promise.all([
 			loadTable('header.html').then(content => `<div class="header-table">${content}</div>`),
 			loadTable('table1.html').then(content => `<div class="table1 table">${content}</div>`),
@@ -46,6 +41,5 @@
 			document.getElementById('combinedTables').innerHTML = tables.join(''); // Объединяем таблицы без пробелов
 		});
     </script>
-
 </body>
 </html>
