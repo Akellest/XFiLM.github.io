@@ -91,13 +91,13 @@
 }
 
 .table1 td {
-    border-color: #CC0000; /* Цвет границы для первой таблицы */
+    border-color: #CC0000;
 }
 
 .table2 td {
-    border-color: #CEE2F3; /* Цвет границы для второй таблицы */
+    border-color: #CEE2F3;
 }
 
 .table3 td {
-    border-color: #4986E8; /* Цвет границы для третьей таблицы */
+    border-color: #4986E8;
 }
