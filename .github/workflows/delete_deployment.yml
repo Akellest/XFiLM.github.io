@@ -1,0 +1,34 @@
+name: Cleanup Deployments
+
+on:
+  push:
+    branches:
+      - main  # Укажите ветку, при пуше в которую будет выполняться действие
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: write
+      contents: read  # Нужно для доступа к репозиторию
+
+    steps:
+      - name: Get deployments
+        id: get_deployments
+        run: |
+          deployments=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/deployments")
+          echo "::set-output name=deployments::$deployments"
+
+      - name: Delete old deployments
+        run: |
+          deployments=$(echo "${{ steps.get_deployments.outputs.deployments }}" | jq -r '.[] | select(.status == "success") | .id')
+          last_deployment_id=$(echo "${{ steps.get_deployments.outputs.deployments }}" | jq -r '.[-1].id')
+          
+          for deployment_id in $deployments; do
+            if [ "$deployment_id" != "$last_deployment_id" ]; then
+              echo "Deleting deployment $deployment_id"
+              curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                "https://api.github.com/repos/${{ github.repository }}/deployments/$deployment_id"
+            fi
+          done
