@@ -32,10 +32,10 @@
         }
 
         Promise.all([
-            loadTable('table-header.html').then(content => `<div class="header-table">${content}</div>`),
-            loadTable('table1.html').then(content => `<div class="table1 table">${content}</div>`),
-            loadTable('table2.html').then(content => `<div class="table2 table">${content}</div>`),
-            loadTable('table3.html').then(content => `<div class="table3 table">${content}</div>`)
+            loadTable('table-header.html').then(content => `<div class="header-table"><table class="table">${content}</div>`),
+            loadTable('table1.html').then(content => <div class="table1"><table class="table">${content}</table></div>),
+            loadTable('table2.html').then(content => <div class="table2"><table class="table">${content}</table></div>),
+            loadTable('table3.html').then(content => <div class="table3"><table class="table">${content}</table></div>)
         ]).then(tables => {
             document.getElementById('combinedTables').innerHTML = tables.join('');
         });
