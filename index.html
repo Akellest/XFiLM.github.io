@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <h1>Combined Tables</h1>
 
     <div id="combinedTables"></div>
@@ -67,7 +66,16 @@
 		}
 
 		// Вызываем основную функцию для объединения таблиц
-		combineTables();
+		combineTables().then(() => {
+            // Получаем все гиперссылки на странице
+            const links = document.querySelectorAll('a');
+
+            // Добавляем атрибут target="_blank" ко всем гиперссылкам
+            links.forEach(link => {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer'); // Для безопасности
+            });
+        });
 	</script>
 
 <div id="combinedTables"></div>

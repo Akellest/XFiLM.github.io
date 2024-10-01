@@ -29,7 +29,7 @@
 @font-face {
     font-family: 'AdobeJenson';
     src: url('fonts/AJensonPro-Semibold.ttf') format('truetype');
-    font-weight: bold;
+    font-weight: 700;
     font-style: normal;
 }
 
@@ -48,63 +48,69 @@
 }
 
 @font-face {
-    font-family: 'BaskervilleCyrL';
-    src: url('fonts/BaskervilleCyrL.ttf') format('truetype');
+    font-family: 'agbengalyc';
+    src: url('fonts/agbengalyc.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
+body {
+	background-color: #010101;
+}
+
 .table, .table-header {
     border-collapse: collapse;
-    width: 100%;
-	margin: 0;
+    width: 85%;
+	margin: 0 auto;
 }
 
 .table-header td {
 	border: 2px solid;
-    font-family: 'SPQR', sans-serif;
+    /*font-family: 'SPQR', sans-serif;*/
+	font-family: 'AdobeJenson', sans-serif;
+	font-weight: bold;
+    font-style: normal;
+	color: #E6B259;
+	border-color: #F19F11;
+    border: 3px solid;
+}
+
+.english {
+    font-family: 'AdobeJenson', sans-serif;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.russian {
+	font-family: 'agbengalyc', sans-serif;
+    font-weight: normal;
+    font-style: normal;
 }
 
 .table td, .table-header td {
-    border: 2px solid;
     padding: 10px;
     text-align: center;
     vertical-align: middle;
 }
 
 .table td {
-	font-size: 18px;
+    border: 2px solid;
+	font-size: 24px;
 }
 
 .table-header td {
-	font-size: 26px;
+	font-size: 30px;
 }
-
-.english (
-    font-family: 'AdobeJenson', sans-serif;
-    font-weight: bold;
-    font-style: normal;
-)
-
-.russian (
-	font-family: 'BaskervilleCyrL', sans-serif;
-    font-weight: normal;
-    font-style: normal;
-)
 
 .first-column, .first-column-header {
     width: 30%;
 }
 
 .second-column, .second-column-header {
-    width: 20%;
+    width: 15%;
 }
 
-.third-column {
-    width: 30%;
-}
-
-.third-column-header {
+.third-column, .third-column-header  {
     width: 30%;
 }
 
@@ -113,17 +119,50 @@
 }
 
 .fifth-column, .fifth-column-header {
-    width: 10%;
+    width: 15%;
 }
 
 .table1 td {
     border-color: #CC0000;
+	color: #CCE0F1; 
+}
+
+.table1 td a {
+    color: #CCE0F1;
+    text-decoration: none;
+}
+
+.table1 td a:hover {
+    color: #1CE0F1;
+    text-decoration: underline;
 }
 
 .table2 td {
+	color: #D91919;
     border-color: #CEE2F3;
 }
 
+.table2 td a {
+    color: #D91919;
+    text-decoration: none;
+}
+
+.table2 td a:hover {
+    color: #1CE0F1;
+    text-decoration: underline;
+}
+
 .table3 td {
+    color: #FF9900;
     border-color: #4986E8;
+}
+
+.table3 td a {
+    color: #FF9900;
+    text-decoration: none;
+}
+
+.table3 td a:hover {
+    color: #FF9900;
+    text-decoration: underline;
 }
