@@ -12,33 +12,66 @@
 
     <div id="combinedTables"></div>
 
-    <script>
-        function loadTable(filename) {
-            return fetch(filename)
-                .then(response => response.text())
-                .then(data => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(data, 'text/html');
-                    const tableElement = doc.querySelector('table');
+	<script>
+		// Функция для загрузки таблицы из файла
+		async function loadTable(filename) {
+			try {
+				const response = await fetch(filename);
+				if (!response.ok) {
+					throw new Error(`Ошибка загрузки: ${response.statusText}`);
+				}
+				const data = await response.text();
+				const parser = new DOMParser();
+				const doc = parser.parseFromString(data, 'text/html');
+				const tableElement = doc.querySelector('table');
 
-                    if (!tableElement) {
-                        console.error(`Таблица не найдена в файле: ${filename}`);
-                        return '';
-                    }
+				if (!tableElement) {
+					console.error(`Таблица не найдена в файле: ${filename}`);
+					return '';
+				}
 
-                    return tableElement.outerHTML;
-                })
-                .catch(error => console.error('Ошибка загрузки таблицы:', error));
-        }
+				// Получаем название файла без расширения
+				const className = filename.split('/').pop().split('.')[0];
 
-        Promise.all([
-            loadTable('table-header.html').then(content => `<div class="header-table">${content}</div>`),
-            loadTable('table1.html').then(content => `<div class="table1 table">${content}</div>`),
-            loadTable('table2.html').then(content => `<div class="table2 table">${content}</div>`),
-            loadTable('table3.html').then(content => `<div class="table3 table">${content}</div>`)
-        ]).then(tables => {
-            document.getElementById('combinedTables').innerHTML = tables.join('');
-        });
-    </script>
+				// Добавляем классы к таблице
+				tableElement.classList.add(className);
+				if (className !== 'table-header') { // Убедимся, что это не заголовок
+					tableElement.classList.add('table');
+				}
+
+				// Возвращаем обновленное внешнее HTML таблицы
+				return tableElement.outerHTML;
+			} catch (error) {
+				console.error('Ошибка загрузки таблицы:', error);
+				return '';
+			}
+		}
+
+		// Основная функция для объединения таблиц
+		async function combineTables() {
+			const tableFiles = ['table-header.html', 'table1.html', 'table2.html', 'table3.html'];
+			const tablePromises = tableFiles.map(loadTable);
+
+			const tables = await Promise.all(tablePromises);
+			const combinedContent = tables.join(''); // Объединяем таблицы без отступов
+			document.getElementById('combinedTables').innerHTML = combinedContent; // Вставляем в нужный элемент
+			
+			document.querySelectorAll('.third-column').forEach(cell => {
+                // Проверяем, содержит ли ячейка русские символы
+                if (/[а-яА-ЯЁё]/.test(cell.textContent)) {
+                    cell.classList.add('russian'); // Если содержит русский текст, добавляем класс для русского шрифта
+                } else {
+                    cell.classList.add('english'); // Иначе добавляем класс для английского шрифта
+                }
+            });
+		}
+
+		// Вызываем основную функцию для объединения таблиц
+		combineTables();
+	</script>
+
+<div id="combinedTables"></div>
+
+
 </body>
 </html>

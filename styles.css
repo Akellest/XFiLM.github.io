@@ -47,46 +47,72 @@
     font-style: normal;
 }
 
-.table, .header-table {
+@font-face {
+    font-family: 'BaskervilleCyrL';
+    src: url('fonts/BaskervilleCyrL.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.table, .table-header {
     border-collapse: collapse;
     width: 100%;
-    /*margin-bottom: 0px;
-    margin-top: 0px;*/
 	margin: 0;
 }
 
-.header-table td {
+.table-header td {
 	border: 2px solid;
     font-family: 'SPQR', sans-serif;
 }
 
-.table td, .header-table td {
+.table td, .table-header td {
     border: 2px solid;
     padding: 10px;
     text-align: center;
     vertical-align: middle;
 }
 
-.first-column {
+.table td {
+	font-size: 18px;
+}
+
+.table-header td {
+	font-size: 26px;
+}
+
+.english (
+    font-family: 'AdobeJenson', sans-serif;
+    font-weight: bold;
+    font-style: normal;
+)
+
+.russian (
+	font-family: 'BaskervilleCyrL', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+)
+
+.first-column, .first-column-header {
     width: 30%;
 }
 
-.second-column {
+.second-column, .second-column-header {
     width: 20%;
 }
 
 .third-column {
-    font-family: 'AdobeJenson', sans-serif;
-    font-weight: bold;
-    font-style: normal;
     width: 30%;
 }
 
-.fourth-column {
+.third-column-header {
+    width: 30%;
+}
+
+.fourth-column, .fourth-column-header {
     width: 10%;
 }
 
-.fifth-column {
+.fifth-column, .fifth-column-header {
     width: 10%;
 }
 
