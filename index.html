@@ -12,7 +12,8 @@
     <div id="tooltip" class="tooltip"></div>
 
     <script>
-		const seriesClasses = ['harry-potter', 'potc', 'avengers', 'krok-gena', 'bourne', 'x-men', 'batman-nolan', 'miniputs', 'bagr-reki', 'spy-kids', 'iron-man', 'carlson-ussr', 'transformers', 'fast-furious', 'sherlock-ussr', 'shrek', 'parkour13', 'adrenalin', 'astral', 'brat', 'casa-papel', 'hunger-games', 'tattoo-girl', 'john-wick', 'divergent', 'big-mamma-house', 'star-wars', 'fockers', 'ip-man', 'james-bond', 'jump-street', 'mission-impossible', 'scary-movie', 'wolferine', 'silent-hill', 'split', 'twin-peaks', 'terminator', 'topgun', 'ouija', 'monsters-disney', 'narnia-chronicles', 'alien', 'sherlock-robert', 'conjuring', 'taken-girl'];
+        const seriesClasses = ['harry-potter', 'potc', 'avengers', 'krok-gena', 'bourne', 'x-men', 'batman-nolan', 'miniputs', 'bagr-reki', 'spy-kids', 'iron-man', 'carlson-ussr', 'transformers', 'fast-furious', 'sherlock-ussr', 'shrek', 'parkour13', 'adrenalin', 'astral', 'brat', 'casa-papel', 'hunger-games', 'tattoo-girl', 'john-wick', 'divergent', 'big-mamma-house', 'star-wars', 'fockers', 'ip-man', 'james-bond', 'jump-street', 'mission-impossible', 'scary-movie', 'wolferine', 'silent-hill', 'split', 'twin-peaks', 'terminator', 'topgun', 'ouija', 'monsters-disney', 'narnia-chronicles', 'alien', 'sherlock-robert', 'conjuring', 'taken-girl'];
+
         // Функция для загрузки таблицы из файла
         async function loadFile(filename, elementId) {
             try {
@@ -84,40 +85,39 @@
             addHoverEffect();
         }
 
-		function addHoverEffect() {
-			const tooltip = document.getElementById('tooltip');
+        function addHoverEffect() {
+            const tooltip = document.getElementById('tooltip');
 
-			seriesClasses.forEach(seriesClass => {
-				const movies = document.querySelectorAll(`.${seriesClass}`);
+            seriesClasses.forEach(seriesClass => {
+                const movies = document.querySelectorAll(`.${seriesClass}`);
 
-				movies.forEach(movie => {
-					// Используем mousemove для отслеживания движения курсора
-					movie.addEventListener('mousemove', (event) => {
-						// Сбор названий всех фильмов с текущим классом
-						const movieInfo = Array.from(document.querySelectorAll(`.${seriesClass}`)).map(el => {
-							const yearCell = el.closest('tr').querySelector('td.fourth-column:nth-of-type(4)'); // Получаем год из 4-го столбца
-							return { title: el.textContent, year: yearCell ? yearCell.textContent : 'Unknown' };
-						});
+                movies.forEach(movie => {
+                    // Используем mousemove для отслеживания движения курсора
+                    movie.addEventListener('mousemove', (event) => {
+                        // Сбор названий всех фильмов с текущим классом
+                        const movieInfo = Array.from(document.querySelectorAll(`.${seriesClass}`)).map(el => {
+                            const yearCell = el.closest('tr').querySelector('td.fourth-column:nth-of-type(4)'); // Получаем год из 4-го столбца
+                            return { title: el.textContent, year: yearCell ? yearCell.textContent : 'Unknown' };
+                        });
 
-						// Сортируем фильмы по году
-						movieInfo.sort((a, b) => a.year - b.year); // Сортировка по году (числовая сортировка)
+                        // Сортируем фильмы по году
+                        movieInfo.sort((a, b) => a.year - b.year); // Сортировка по году (числовая сортировка)
 
-						tooltip.innerHTML = movieInfo.map(info => info.title).join('<br>');
+                        tooltip.innerHTML = movieInfo.map(info => info.title).join('<br>');
 
-						tooltip.style.display = 'block';
+                        tooltip.style.display = 'block';
 
-						// Позиционирование tooltip рядом с курсором
-						tooltip.style.left = `${event.pageX + 10}px`; // Смещение вправо на 10px
-						tooltip.style.top = `${event.pageY + 10}px`; // Смещение вниз на 10px
-					});
+                        // Позиционирование tooltip рядом с курсором
+                        tooltip.style.left = `${event.pageX + 10}px`; // Смещение вправо на 10px
+                        tooltip.style.top = `${event.pageY + 10}px`; // Смещение вниз на 10px
+                    });
 
-					movie.addEventListener('mouseout', () => {
-						tooltip.style.display = 'none';
-					});
-				});
-			});
-		}
-
+                    movie.addEventListener('mouseout', () => {
+                        tooltip.style.display = 'none';
+                    });
+                });
+            });
+        }
 
         // Вызываем основную функцию для объединения таблиц
         combineTables().then(() => {
