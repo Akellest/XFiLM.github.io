@@ -22,3 +22,7 @@ jobs:
     - name: Run HTML updater script
       run: |
         python script/br_updater.py
+
+    - name: Run sorting script
+      run: |
+        python script/sorting.py

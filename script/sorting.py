@@ -1,11 +1,6 @@
 import os
 import re
 from bs4 import BeautifulSoup
-import logging
-
-# Настройка логирования
-log_file_path = os.path.join('script', 'update_log.txt')  # Указываем путь к файлу логов
-logging.basicConfig(filename=log_file_path, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def sort_table_by_first_column(soup):
     table = soup.find('table')
@@ -31,29 +26,23 @@ def sort_table_by_first_column(soup):
     table.replace_with(new_table)
 
 def update_html_file(filename):
-    try:
-        with open(filename, 'r', encoding='utf-8') as file:
-            html_content = file.read()
+    with open(filename, 'r', encoding='utf-8') as file:
+        html_content = file.read()
 
-        soup = BeautifulSoup(html_content, 'html.parser')
-        sort_table_by_first_column(soup)
+    soup = BeautifulSoup(html_content, 'html.parser')
+    sort_table_by_first_column(soup)
 
-        with open(filename, 'w', encoding='utf-8') as file:
-            file.write(str(soup))
+    with open(filename, 'w', encoding='utf-8') as file:
+        file.write(str(soup))
 
-        logging.info(f"Таблица отсортирована в файле '{filename}'.")
-    except Exception as e:
-        logging.error(f"Ошибка при обработке файла '{filename}': {e}")
+    print(f"Таблица отсортирована в файле '{filename}'.")
 
-# Поиск всех HTML файлов
-html_directory = '../html'
-html_files = [f for f in os.listdir(html_directory) if f.endswith('.html') and f.startswith('table')]
-logging.info(f"Найдено HTML файлов: {len(html_files)}: {html_files}")
+html_files = [f for f in os.listdir('/html') if f.endswith('.html') and f.startswith('table')]
+print(f"Найдено HTML файлов: {len(html_files)}")
+print(html_files)
 
 if not html_files:
-    logging.warning("Не найдено HTML файлов для обработки.")
+    print("Не найдено HTML файлов для обработки.")
 else:
     for html_file in html_files:
-        update_html_file(os.path.join(html_directory, html_file))
-
-logging.info("Скрипт завершил выполнение.")
+        update_html_file(os.path.join('../html', html_file))
