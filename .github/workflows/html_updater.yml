@@ -22,6 +22,3 @@ jobs:
     - name: Run HTML updater script
       run: |
         python script/br_updater.py
-
-    - name: Display logs
-      run: cat script/update_log.txt

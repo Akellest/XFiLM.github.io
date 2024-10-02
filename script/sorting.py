@@ -4,7 +4,8 @@ from bs4 import BeautifulSoup
 import logging
 
 # Настройка логирования
-logging.basicConfig(filename='update_log.txt', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+log_file_path = os.path.join('script', 'update_log.txt')  # Указываем путь к файлу логов
+logging.basicConfig(filename=log_file_path, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def sort_table_by_first_column(soup):
     table = soup.find('table')
