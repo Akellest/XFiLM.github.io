@@ -1,14 +1,13 @@
 import os
-import numpy as np  # Необходим для работы с nan
+import numpy as np
 from bs4 import BeautifulSoup
 
-def update_html_file(filename):
-    with open(filename, 'r', encoding='utf-8') as file:
+def update_html_file(filepath):
+    with open(filepath, 'r', encoding='utf-8') as file:
         html_content = file.read()
 
     soup = BeautifulSoup(html_content, 'html.parser')
 
-    # Обработка ссылок
     for link in soup.find_all('a'):
         link_text = link.text
         parts = link_text.split('/Slash/')
@@ -20,35 +19,35 @@ def update_html_file(filename):
             new_content.append(new_link)
 
             if i < len(parts) - 1:
-                new_content.append(soup.new_tag('br'))  # Используем <br> для переноса
-                new_content.append('/')  # Добавляем символ "/"
-                new_content.append(soup.new_tag('br'))  # Перенос строки после "/"
+                new_content.append(soup.new_tag('br'))
+                new_content.append('/')
+                new_content.append(soup.new_tag('br'))
 
         link.replace_with(new_content)
 
-    # Удаление значений None и nan из второго и пятого столбца
-    for tr in soup.find_all('tr'):  # Ищем все строки таблицы
-        # Удаляем значения в 2-ом столбце
+    for tr in soup.find_all('tr'):
         second_column = tr.find_all('td')[1] if len(tr.find_all('td')) > 1 else None
         if second_column:
-            if second_column.text.strip() in ["None", "nan"]:  # Проверка на "None" или "nan"
-                second_column.clear()  # Удаляем содержимое ячейки
+            if second_column.text.strip() in ["None", "nan"]:
+                second_column.clear()
 
-        # Удаляем значения в 5-ом столбце
         fifth_column = tr.find_all('td')[4] if len(tr.find_all('td')) > 4 else None
         if fifth_column:
-            if fifth_column.text.strip() in ["None", "nan"]:  # Проверка на "None" или "nan"
-                fifth_column.clear()  # Удаляем содержимое ячейки
+            if fifth_column.text.strip() in ["None", "nan"]:
+                fifth_column.clear()
 
-    with open(filename, 'w', encoding='utf-8') as file:
+    with open(filepath, 'w', encoding='utf-8') as file:
         file.write(str(soup))
 
-    print(f"Замена завершена в '{filename}'.")
+    print(f"Замена завершена в '{filepath}'.")
 
-# Поиск всех HTML файлов, кроме index.html и других исключаемых файлов
-html_files = [f for f in os.listdir('.') if f.endswith('.html') and f != 'index.html' and f != 'table-header.html' and f != '404.html']
+html_directory = os.path.join('..', 'html')
+
+html_files = [os.path.join(html_directory, f) for f in os.listdir(html_directory) 
+              if f.endswith('.html') and f not in ['index.html', 'table-header.html', '404.html']]
+
 print(f"Найдено HTML файлов: {len(html_files)}")
-print(html_files)  # Вывод списка файлов в консоль
+print(html_files)
 
 if not html_files:
     print("Не найдено HTML файлов для обработки.")
