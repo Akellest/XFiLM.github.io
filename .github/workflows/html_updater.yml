@@ -21,4 +21,4 @@ jobs:
 
     - name: Run HTML updater script
       run: |
-        python br_updater.py
+        python script/br_updater.py

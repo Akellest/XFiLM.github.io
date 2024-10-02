@@ -11,7 +11,7 @@ def update_html_file(filename):
     # Обработка ссылок
     for link in soup.find_all('a'):
         link_text = link.text
-        parts = link_text.split('/')
+        parts = link_text.split('/Slash/')
         new_content = BeautifulSoup("", 'html.parser')
 
         for i, part in enumerate(parts):

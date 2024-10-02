@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<div id="prescriptum"></div>
+    <div id="prescriptum"></div>
     <div id="combinedTables"></div>
+    <div id="tooltip" class="tooltip"></div>
 
-	<script>
-		// Функция для загрузки таблицы из файла
-		async function loadFile(filename, elementId) {
+    <script>
+		const seriesClasses = ['harry-potter', 'potc', 'avengers', 'krok-gena', 'bourne', 'x-men', 'batman-nolan', 'miniputs', 'bagr-reki', 'spy-kids', 'iron-man', 'carlson-ussr', 'transformers', 'fast-furious', 'sherlock-ussr', 'shrek', 'parkour13', 'adrenalin', 'astral', 'brat', 'casa-papel', 'hunger-games', 'tattoo-girl', 'john-wick', 'divergent', 'big-mamma-house', 'star-wars', 'fockers', 'ip-man', 'james-bond', 'jump-street', 'mission-impossible', 'scary-movie', 'wolferine', 'silent-hill', 'split', 'twin-peaks', 'terminator', 'topgun', 'ouija', 'monsters-disney', 'narnia-chronicles', 'alien', 'sherlock-robert'];
+        // Функция для загрузки таблицы из файла
+        async function loadFile(filename, elementId) {
             try {
-                const response = await fetch(filename);
+                const response = await fetch(`html/${filename}`);
                 if (!response.ok) {
                     throw new Error(`Ошибка загрузки: ${response.statusText}`);
                 }
@@ -27,51 +29,50 @@
 
         // Загрузка файла prescriptum.html в div с id="prescriptum"
         loadFile('prescriptum.html', 'prescriptum');
-		
-		
-		async function loadTable(filename) {
-			try {
-				const response = await fetch(filename);
-				if (!response.ok) {
-					throw new Error(`Ошибка загрузки: ${response.statusText}`);
-				}
-				const data = await response.text();
-				const parser = new DOMParser();
-				const doc = parser.parseFromString(data, 'text/html');
-				const tableElement = doc.querySelector('table');
 
-				if (!tableElement) {
-					console.error(`Таблица не найдена в файле: ${filename}`);
-					return '';
-				}
+        async function loadTable(filename) {
+            try {
+                const response = await fetch(`html/${filename}`);
+                if (!response.ok) {
+                    throw new Error(`Ошибка загрузки: ${response.statusText}`);
+                }
+                const data = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+                const tableElement = doc.querySelector('table');
 
-				// Получаем название файла без расширения
-				const className = filename.split('/').pop().split('.')[0];
+                if (!tableElement) {
+                    console.error(`Таблица не найдена в файле: ${filename}`);
+                    return '';
+                }
 
-				// Добавляем классы к таблице
-				tableElement.classList.add(className);
-				if (className !== 'table-header') { // Убедимся, что это не заголовок
-					tableElement.classList.add('table');
-				}
+                // Получаем название файла без расширения
+                const className = filename.split('/').pop().split('.')[0];
 
-				// Возвращаем обновленное внешнее HTML таблицы
-				return tableElement.outerHTML;
-			} catch (error) {
-				console.error('Ошибка загрузки таблицы:', error);
-				return '';
-			}
-		}
+                // Добавляем классы к таблице
+                tableElement.classList.add(className);
+                if (className !== 'table-header') { // Убедимся, что это не заголовок
+                    tableElement.classList.add('table');
+                }
 
-		// Основная функция для объединения таблиц
-		async function combineTables() {
-			const tableFiles = ['table-header.html', 'quote0.html', 'table1.html', 'table2.html', 'table3.html'];
-			const tablePromises = tableFiles.map(loadTable);
+                // Возвращаем обновленное внешнее HTML таблицы
+                return tableElement.outerHTML;
+            } catch (error) {
+                console.error('Ошибка загрузки таблицы:', error);
+                return '';
+            }
+        }
 
-			const tables = await Promise.all(tablePromises);
-			const combinedContent = tables.join(''); // Объединяем таблицы без отступов
-			document.getElementById('combinedTables').innerHTML = combinedContent; // Вставляем в нужный элемент
-			
-			document.querySelectorAll('.third-column').forEach(cell => {
+        // Основная функция для объединения таблиц
+        async function combineTables() {
+            const tableFiles = ['table-header.html', 'quote0.html', 'table1.html', 'quote1.html', 'table2.html', 'quote2.html', 'table3.html', 'quote3.html', 'table4.html'];
+            const tablePromises = tableFiles.map(loadTable);
+
+            const tables = await Promise.all(tablePromises);
+            const combinedContent = tables.join(''); // Объединяем таблицы без отступов
+            document.getElementById('combinedTables').innerHTML = combinedContent; // Вставляем в нужный элемент
+
+            document.querySelectorAll('.third-column').forEach(cell => {
                 // Проверяем, содержит ли ячейка русские символы
                 if (/[а-яА-ЯЁё]/.test(cell.textContent)) {
                     cell.classList.add('russian'); // Если содержит русский текст, добавляем класс для русского шрифта
@@ -79,10 +80,47 @@
                     cell.classList.add('english'); // Иначе добавляем класс для английского шрифта
                 }
             });
+
+            addHoverEffect();
+        }
+
+		function addHoverEffect() {
+			const tooltip = document.getElementById('tooltip');
+
+			seriesClasses.forEach(seriesClass => {
+				const movies = document.querySelectorAll(`.${seriesClass}`);
+
+				movies.forEach(movie => {
+					// Используем mousemove для отслеживания движения курсора
+					movie.addEventListener('mousemove', (event) => {
+						// Сбор названий всех фильмов с текущим классом
+						const movieInfo = Array.from(document.querySelectorAll(`.${seriesClass}`)).map(el => {
+							const yearCell = el.closest('tr').querySelector('td.fourth-column:nth-of-type(4)'); // Получаем год из 4-го столбца
+							return { title: el.textContent, year: yearCell ? yearCell.textContent : 'Unknown' };
+						});
+
+						// Сортируем фильмы по году
+						movieInfo.sort((a, b) => a.year - b.year); // Сортировка по году (числовая сортировка)
+
+						tooltip.innerHTML = movieInfo.map(info => info.title).join('<br>');
+
+						tooltip.style.display = 'block';
+
+						// Позиционирование tooltip рядом с курсором
+						tooltip.style.left = `${event.pageX + 10}px`; // Смещение вправо на 10px
+						tooltip.style.top = `${event.pageY + 10}px`; // Смещение вниз на 10px
+					});
+
+					movie.addEventListener('mouseout', () => {
+						tooltip.style.display = 'none';
+					});
+				});
+			});
 		}
 
-		// Вызываем основную функцию для объединения таблиц
-		combineTables().then(() => {
+
+        // Вызываем основную функцию для объединения таблиц
+        combineTables().then(() => {
             // Получаем все гиперссылки на странице
             const links = document.querySelectorAll('a');
 
@@ -92,10 +130,9 @@
                 link.setAttribute('rel', 'noopener noreferrer'); // Для безопасности
             });
         });
-	</script>
+    </script>
 
-<div id="combinedTables"></div>
-
+    <div id="combinedTables"></div>
 
 </body>
 </html>

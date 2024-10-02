@@ -119,6 +119,15 @@ body {
     border: 3px solid;
 }
 
+.table td {
+    border: 2px solid;
+	font-size: 26px;
+}
+
+.table-header td {
+	font-size: 24px;
+}
+
 .english {
     font-family: 'AdobeJenson', sans-serif;
     font-weight: bold;
@@ -127,6 +136,7 @@ body {
 
 .russian {
 	font-family: 'agbengalyc', sans-serif;
+	font-size: 23px !important;
     font-weight: normal;
     font-style: normal;
 }
@@ -137,13 +147,21 @@ body {
     vertical-align: middle;
 }
 
-.table td {
-    border: 2px solid;
-	font-size: 26px;
-}
-
-.table-header td {
-	font-size: 24px;
+.tooltip {
+    font-family: 'agbengalyc', sans-serif;
+    display: none; 
+    position: absolute; 
+    background-color: rgba(255, 255, 255, 0.9); 
+    border: 2px solid #FF0000; 
+    padding: 10px; 
+    z-index: 10; 
+    min-width: 250px;
+    max-width: 350px; 
+    color: #000000; 
+    border-radius: 15px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
 }
 
 .first-column, .first-column-header {
@@ -167,19 +185,7 @@ body {
 }
 
 .fourth-column, .fifth-column {
-	font-family: 'agbengalyc', sans-serif;
-}
-
-.quote0 td {
-    border-color: #CC0000;
-}
-
-.quote0 tr:first-child td {
-    border-top: none; /* Убираем верхнюю границу у первой строки */
-}
-
-.quote0 tr:last-child td {
-    border-bottom: none; /* Убираем нижнюю границу у последней строки */
+	font-family: 'TwCenMTStd', sans-serif;
 }
 
 .quote-text {
@@ -188,6 +194,19 @@ body {
 	background-color: #f3f3f3;
 	display: inline;
 	border-radius: 4px;
+}
+
+.quote0 td {
+    border-color: #CC0000;
+	border-width: 3px;
+}
+
+.quote0 tr:first-child td {
+    border-top: none;
+}
+
+.quote0 tr:last-child td {
+    border-bottom: none;
 }
 
 .table1 td {
@@ -203,6 +222,19 @@ body {
 .table1 td a:hover {
     color: #1CE0F1;
     text-decoration: underline;
+}
+
+.table1 tr:last-child td {
+    border-bottom: none;
+}
+
+.quote1 td {
+    border-color: #CEE2F3;
+	border-width: 3px;
+}
+
+.quote1 tr:last-child td {
+    border-bottom: none;
 }
 
 .table2 td {
@@ -231,6 +263,21 @@ body {
 }
 
 .table3 td a:hover {
+    color: #FF9900;
+    text-decoration: underline;
+}
+
+.table4 td {
+    color: #FF9900;
+    border-color: #4986E8;
+}
+
+.table4 td a {
+    color: #FF9900;
+    text-decoration: none;
+}
+
+.table4 td a:hover {
     color: #FF9900;
     text-decoration: underline;
 }
