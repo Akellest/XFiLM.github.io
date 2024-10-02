@@ -4,7 +4,7 @@
 - add text above header
 - add quotes
 - add tickets for quotes
--
+- check prescript date changing
 
 Не
 /
