@@ -45,4 +45,4 @@ if not html_files:
     print("Не найдено HTML файлов для обработки.")
 else:
     for html_file in html_files:
-        update_html_file(os.path.join('../html', html_file))
+        update_html_file(os.path.join('html', html_file))
