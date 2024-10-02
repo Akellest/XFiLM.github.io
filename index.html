@@ -7,12 +7,28 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Combined Tables</h1>
-
+	<div id="prescriptum"></div>
     <div id="combinedTables"></div>
 
 	<script>
 		// Функция для загрузки таблицы из файла
+		async function loadFile(filename, elementId) {
+            try {
+                const response = await fetch(filename);
+                if (!response.ok) {
+                    throw new Error(`Ошибка загрузки: ${response.statusText}`);
+                }
+                const data = await response.text();
+                document.getElementById(elementId).innerHTML = data;
+            } catch (error) {
+                console.error('Ошибка:', error);
+            }
+        }
+
+        // Загрузка файла prescriptum.html в div с id="prescriptum"
+        loadFile('prescriptum.html', 'prescriptum');
+		
+		
 		async function loadTable(filename) {
 			try {
 				const response = await fetch(filename);
@@ -48,7 +64,7 @@
 
 		// Основная функция для объединения таблиц
 		async function combineTables() {
-			const tableFiles = ['table-header.html', 'table1.html', 'table2.html', 'table3.html'];
+			const tableFiles = ['table-header.html', 'quote0.html', 'table1.html', 'table2.html', 'table3.html'];
 			const tablePromises = tableFiles.map(loadTable);
 
 			const tables = await Promise.all(tablePromises);

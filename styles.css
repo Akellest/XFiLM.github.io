@@ -54,8 +54,53 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'B52';
+    src: url('fonts/B52.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TwCenMTStd';
+    src: url('fonts/TwCenMTStd.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SpecialElite';
+    src: url('fonts/SpecialElite.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Platypi';
+    src: url('fonts/Platypi-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
 	background-color: #010101;
+}
+
+.prescript-main {
+	text-align: center;
+    font-family: 'TwCenMTStd', sans-serif;
+	font-size: 28px;
+	margin-bottom: 20px; 
+}
+
+.prescript-Creasy {
+    width: 85%;
+    text-align: right;
+    margin: 0 auto;
+    font-family: 'TwCenMTStd', sans-serif;
+	color: #FFFFFF;
+	font-size: 28px;
+    padding-bottom: 10px;
 }
 
 .table, .table-header {
@@ -66,7 +111,6 @@ body {
 
 .table-header td {
 	border: 2px solid;
-    /*font-family: 'SPQR', sans-serif;*/
 	font-family: 'AdobeJenson', sans-serif;
 	font-weight: bold;
     font-style: normal;
@@ -119,7 +163,31 @@ body {
 }
 
 .fifth-column, .fifth-column-header {
-    width: 10%;
+    width: 15%;
+}
+
+.fourth-column, .fifth-column {
+	font-family: 'agbengalyc', sans-serif;
+}
+
+.quote0 td {
+    border-color: #CC0000;
+}
+
+.quote0 tr:first-child td {
+    border-top: none; /* Убираем верхнюю границу у первой строки */
+}
+
+.quote0 tr:last-child td {
+    border-bottom: none; /* Убираем нижнюю границу у последней строки */
+}
+
+.quote-text {
+	font-size: 30px;
+	font-family: 'b52', sans-serif;
+	background-color: #f3f3f3;
+	display: inline;
+	border-radius: 4px;
 }
 
 .table1 td {
