@@ -41,12 +41,13 @@ def update_html_file(filepath):
 
     print(f"Замена завершена в '{filepath}'.")
 
-print(os.listdir)
+print(os.listdir())
 os.listdir(os.getcwd())
 
 html_directory = os.path.join('..', 'html')
 print(html_directory)
 os.listdir(html_directory)
+
 
 html_files = [os.path.join(html_directory, f) for f in os.listdir(html_directory) 
               if f.endswith('.html') and f not in ['index.html', 'table-header.html', '404.html']]
