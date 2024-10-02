@@ -6,7 +6,7 @@
 - add tickets for quotes
 - check prescript date changing
 - change font 4&5col
-  
+- class = not-br-change
 Не
 /
 смотря ни на что
