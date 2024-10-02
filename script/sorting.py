@@ -37,7 +37,7 @@ def update_html_file(filename):
 
     print(f"Таблица отсортирована в файле '{filename}'.")
 
-html_files = [f for f in os.listdir('html') if f.endswith('.html') and f.startswith('table')]
+html_files = [f for f in os.listdir('html') if f.endswith('.html') and f.startswith('table') and f != 'table-header.html']
 print(f"Найдено HTML файлов: {len(html_files)}")
 print(html_files)
 
