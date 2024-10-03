@@ -27,6 +27,7 @@ if latest_file:
     print(f'Последний измененный файл: {latest_file}')
     print(f'Дата последнего изменения: {last_modified_date}')
     
+<<<<<<< HEAD
     with open('html/prescriptum.html', 'r+', encoding='utf-8') as html_file:
         content = html_file.read()
 	print(html_file)
@@ -38,6 +39,28 @@ if latest_file:
         html_file.seek(0)
         html_file.write(updated_content)
         html_file.truncate()
+=======
+    try:
+        with open('html/prescriptum.html', 'r+', encoding='utf-8') as html_file:
+            content = html_file.read()
+            
+            # Заменяем дату в контенте
+            updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
+
+            # Проверяем, были ли изменения
+            if updated_content != content:
+                print(f"content: {content}")
+                print(f"updated_content: {updated_content}")
+
+                # Перезаписываем файл
+                html_file.seek(0)  # Перемещаем указатель в начало файла
+                html_file.write(updated_content)  # Записываем обновленный контент
+                html_file.truncate()  # Обрезаем файл, если обновленный контент короче
+            else:
+                print("Нет изменений в контенте.")
+    except Exception as e:
+        print(f"Произошла ошибка при записи в файл: {e}")
+>>>>>>> d08a011c4c6b12a102eef382bea5f42244b4ae26
 else:
     print('Нет файлов в директории.')
 input()
