@@ -28,9 +28,10 @@ if latest_file:
     print(f'Последний измененный файл: {latest_file}')
     print(f'Дата последнего изменения: {last_modified_date}')
 
-    html_file = os.path.join(directory_path, 'prescriptum.html')
+    html_file_path = os.path.join(directory_path, 'prescriptum.html')
 
-    with open(html_file, 'r+', encoding='utf-8') as file:
+    # Читаем содержимое оригинального файла
+    with open(html_file_path, 'r', encoding='utf-8') as file:
         content = file.read()
         
         # Заменяем дату в контенте
@@ -39,12 +40,16 @@ if latest_file:
         print(f"content: {content}")
         print(f"updated_content: {updated_content}")
 
-        # Перезаписываем файл
-        file.seek(0)  # Перемещаем указатель в начало файла
+    # Удаляем оригинальный файл
+    os.remove(html_file_path)
+    print(f"Удален файл: {html_file_path}")
+
+    # Создаем новый файл с обновленным контентом
+    with open(html_file_path, 'w', encoding='utf-8') as file:
         file.write(updated_content)  # Записываем обновленный контент
-        file.truncate()  # Обрезаем файл, если обновленный контент короче
-        
-    with open(html_file, 'r', encoding='utf-8') as file:
+
+    # Проверяем содержимое нового файла
+    with open(html_file_path, 'r', encoding='utf-8') as file:
         final_content = file.read()
         print("Содержимое файла после изменений:")
         print(final_content)
