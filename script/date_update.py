@@ -1,6 +1,7 @@
 import os
 import re
 from datetime import datetime
+from bs4 import BeautifulSoup  # Импортируем библиотеку для работы с HTML
 
 directory_path = os.path.join('html')
 
@@ -53,5 +54,9 @@ if latest_file:
         final_content = file.read()
         print("Содержимое файла после изменений:")
         print(final_content)
+    
+        print(f"file: {file}")
+        print(f"listdir: {os.listdir(directory_path)}")
+    
 else:
     print('Нет файлов в директории.')
