@@ -30,22 +30,23 @@ if latest_file:
 
     html_file = os.path.join(directory_path, 'prescriptum.html')
 
-    try:
-        with open(html_file, 'r+', encoding='utf-8') as file:
-            content = file.read()
-            
-            # Заменяем дату в контенте
-            updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
+    with open(html_file, 'r+', encoding='utf-8') as file:
+        content = file.read()
+        
+        # Заменяем дату в контенте
+        updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
 
-            print(f"content: {content}")
-            print(f"updated_content: {updated_content}")
+        print(f"content: {content}")
+        print(f"updated_content: {updated_content}")
 
-            # Перезаписываем файл
-            file.seek(0)  # Перемещаем указатель в начало файла
-            file.write(updated_content)  # Записываем обновленный контент
-            file.truncate()  # Обрезаем файл, если обновленный контент короче
-
-    except Exception as e:
-        print(f"Произошла ошибка при записи в файл: {e}")
+        # Перезаписываем файл
+        file.seek(0)  # Перемещаем указатель в начало файла
+        file.write(updated_content)  # Записываем обновленный контент
+        file.truncate()  # Обрезаем файл, если обновленный контент короче
+        
+    with open(html_file, 'r', encoding='utf-8') as file:
+        final_content = file.read()
+        print("Содержимое файла после изменений:")
+        print(final_content)
 else:
     print('Нет файлов в директории.')
