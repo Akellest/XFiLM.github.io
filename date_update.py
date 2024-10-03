@@ -37,9 +37,9 @@ if latest_file:
         
         updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
         
-        html_file.seek(0)
-        html_file.write(updated_content)
-        html_file.truncate()
+        file.seek(0)
+        file.write(updated_content)
+        file.truncate()
     
 else:
     print('Нет файлов в директории.')
