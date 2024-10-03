@@ -30,9 +30,11 @@ if latest_file:
 
     try:
         # Открываем файл prescriptum.html для редактирования
-        with open('html/prescriptum.html', 'r+', encoding='utf-8') as html_file:
+        prescriptum_file_path = os.path.join('html', 'prescriptum.html')
+        print(f"Открываем файл: {prescriptum_file_path}")  # Проверка пути
+
+        with open(prescriptum_file_path, 'r+', encoding='utf-8') as html_file:
             content = html_file.read()
-            print(f"html_file: {html_file}")
             
             # Заменяем дату в контенте
             updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
