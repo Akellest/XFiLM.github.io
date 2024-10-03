@@ -37,13 +37,6 @@ def update_html_file(filename):
 
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(str(soup))
-    
-    if filename.endswith("table3.html"):
-        with open(filename, 'r', encoding='utf-8') as file:
-            html_content = file.read()
-            # Выводим последние 200 символов
-            print(f"Последние 200 символов в файле '{filename}':")
-            print(html_content[-200:])
 
     print(f"Таблица отсортирована в файле '{filename}'.")
 
@@ -56,6 +49,3 @@ if not html_files:
 else:
     for html_file in html_files:
         update_html_file(os.path.join('html', html_file))
-
-        
-input()
