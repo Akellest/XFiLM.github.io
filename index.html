@@ -5,35 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Combined Tables</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .editable {
-            background-color: #f0e68c; /* Цвет для выделения редактируемых ячеек */
-        }
-        /* Стиль для кнопок */
-        .button-container {
-            position: fixed; /* Зафиксированное положение */
-            top: 10px; /* Отступ сверху */
-            right: 10px; /* Отступ справа */
-            z-index: 1000; /* Слой над другими элементами */
-        }
-        .button-container button {
-            margin: 5px; /* Отступы между кнопками */
-            padding: 10px 15px; /* Размеры кнопок */
-            cursor: pointer; /* Курсор при наведении */
-        }
-    </style>
 </head>
 <body>
     <div id="prescriptum"></div>
     <div id="combinedTables"></div>
     <div id="tooltip" class="tooltip"></div>
-    
-    <!-- Контейнер для кнопок -->
-    <div class="button-container">
-        <button id="editBtn">Редактировать</button>
-        <button id="saveBtn" style="display: none;">Сохранить изменения</button>
-        <button id="cancelBtn" style="display: none;">Отменить изменения</button>
-    </div>
 
     <script>
         const seriesClasses = ['harry-potter', 'potc', 'avengers', 'krok-gena', 'bourne', 'x-men', 'batman-nolan', 'miniputs', 'bagr-reki', 'spy-kids', 'iron-man', 'carlson-ussr', 'transformers', 'fast-furious', 'sherlock-ussr', 'shrek', 'parkour13', 'adrenalin', 'astral', 'brat', 'casa-papel', 'hunger-games', 'tattoo-girl', 'john-wick', 'divergent', 'big-mamma-house', 'star-wars', 'fockers', 'ip-man', 'james-bond', 'jump-street', 'mission-impossible', 'scary-movie', 'wolferine', 'silent-hill', 'split', 'twin-peaks', 'terminator', 'topgun', 'ouija', 'monsters-disney', 'narnia-chronicles', 'alien', 'sherlock-robert', 'conjuring', 'taken-girl'];
@@ -76,10 +52,11 @@
 
                 // Добавляем классы к таблице
                 tableElement.classList.add(className);
-                if (className !== 'table-header') {
+                if (className !== 'table-header') { // Убедимся, что это не заголовок
                     tableElement.classList.add('table');
                 }
 
+                // Возвращаем обновленное внешнее HTML таблицы
                 return tableElement.outerHTML;
             } catch (error) {
                 console.error('Ошибка загрузки таблицы:', error);
@@ -97,10 +74,11 @@
             document.getElementById('combinedTables').innerHTML = combinedContent; // Вставляем в нужный элемент
 
             document.querySelectorAll('.third-column').forEach(cell => {
+                // Проверяем, содержит ли ячейка русские символы
                 if (/[а-яА-ЯЁё]/.test(cell.textContent)) {
-                    cell.classList.add('russian');
+                    cell.classList.add('russian'); // Если содержит русский текст, добавляем класс для русского шрифта
                 } else {
-                    cell.classList.add('english');
+                    cell.classList.add('english'); // Иначе добавляем класс для английского шрифта
                 }
             });
 
@@ -114,18 +92,24 @@
                 const movies = document.querySelectorAll(`.${seriesClass}`);
 
                 movies.forEach(movie => {
+                    // Используем mousemove для отслеживания движения курсора
                     movie.addEventListener('mousemove', (event) => {
+                        // Сбор названий всех фильмов с текущим классом
                         const movieInfo = Array.from(document.querySelectorAll(`.${seriesClass}`)).map(el => {
-                            const yearCell = el.closest('tr').querySelector('td.fourth-column:nth-of-type(4)');
+                            const yearCell = el.closest('tr').querySelector('td.fourth-column:nth-of-type(4)'); // Получаем год из 4-го столбца
                             return { title: el.textContent, year: yearCell ? yearCell.textContent : 'Unknown' };
                         });
 
-                        movieInfo.sort((a, b) => a.year - b.year);
+                        // Сортируем фильмы по году
+                        movieInfo.sort((a, b) => a.year - b.year); // Сортировка по году (числовая сортировка)
+
                         tooltip.innerHTML = movieInfo.map(info => info.title).join('<br>');
 
                         tooltip.style.display = 'block';
-                        tooltip.style.left = `${event.pageX + 10}px`;
-                        tooltip.style.top = `${event.pageY + 10}px`;
+
+                        // Позиционирование tooltip рядом с курсором
+                        tooltip.style.left = `${event.pageX + 10}px`; // Смещение вправо на 10px
+                        tooltip.style.top = `${event.pageY + 10}px`; // Смещение вниз на 10px
                     });
 
                     movie.addEventListener('mouseout', () => {
@@ -135,55 +119,15 @@
             });
         }
 
-        // Режим редактирования
-        let editing = false;
-
-        document.getElementById('editBtn').addEventListener('click', () => {
-            editing = !editing;
-            document.querySelectorAll('td').forEach(cell => {
-                cell.contentEditable = editing; // Устанавливаем ячейкам свойство contentEditable
-                if (editing) {
-                    cell.classList.add('editable'); // Добавляем класс для выделения редактируемых ячеек
-                } else {
-                    cell.classList.remove('editable'); // Убираем класс
-                }
-            });
-            document.getElementById('saveBtn').style.display = editing ? 'inline' : 'none'; // Показать кнопку сохранения
-            document.getElementById('cancelBtn').style.display = editing ? 'inline' : 'none'; // Показать кнопку отмены
-        });
-
-        document.getElementById('saveBtn').addEventListener('click', () => {
-            if (!editing) return;
-
-            // Окно подтверждения перед сохранением
-            const confirmSave = confirm("Принять изменения?");
-            if (confirmSave) {
-                alert("Изменения приняты!");
-                // Здесь можно добавить логику для сохранения изменений на сервере, если необходимо
-            } else {
-                cancelEditing(); // Если изменения не приняты, вызываем функцию отмены
-            }
-        });
-
-        document.getElementById('cancelBtn').addEventListener('click', () => {
-            cancelEditing(); // Вызываем функцию отмены при нажатии на кнопку отмены
-        });
-
-        function cancelEditing() {
-            document.querySelectorAll('td').forEach(cell => {
-                cell.contentEditable = false; // Отключаем редактирование
-                cell.classList.remove('editable'); // Убираем класс
-            });
-            editing = false;
-            document.getElementById('saveBtn').style.display = 'none'; // Скрыть кнопку сохранения
-            document.getElementById('cancelBtn').style.display = 'none'; // Скрыть кнопку отмены
-        }
-
+        // Вызываем основную функцию для объединения таблиц
         combineTables().then(() => {
+            // Получаем все гиперссылки на странице
             const links = document.querySelectorAll('a');
+
+            // Добавляем атрибут target="_blank" ко всем гиперссылкам
             links.forEach(link => {
                 link.setAttribute('target', '_blank');
-                link.setAttribute('rel', 'noopener noreferrer');
+                link.setAttribute('rel', 'noopener noreferrer'); // Для безопасности
             });
         });
     </script>
