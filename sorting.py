@@ -51,8 +51,19 @@ html_files = [f for f in os.listdir('html') if f.endswith('.html') and f.startsw
 print(f"Найдено HTML файлов: {len(html_files)}")
 print(html_files)
 
+directory_path = os.path.join('html')
+
 if not html_files:
     print("Не найдено HTML файлов для обработки.")
 else:
-    for html_file in html_files:
-        update_html_file(os.path.join('html', html_file))
+    for html_file_path in html_files:
+        html_file = os.path.join(directory_path, html_file_path)
+        update_html_file(html_file)
+
+
+filename = os.path.join('html', 'table3.html')
+with open(filename, 'r', encoding='utf-8') as file:
+    html_content = file.read()
+    # Выводим последние 200 символов
+    print(f"Последние 200 символов в файле '{filename}':")
+    print(html_content[-200:])
