@@ -7,6 +7,11 @@ directory_path = os.path.join('html')
 latest_file = None
 latest_time = 0
 
+html_files = [f for f in os.listdir(directory_path) if f.endswith('.html')]
+print(f"Найдено HTML файлов: {len(html_files)}")
+print(html_files)
+
+
 for filename in os.listdir(directory_path):
     file_path = os.path.join(directory_path, filename)
     
