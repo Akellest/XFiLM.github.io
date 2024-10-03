@@ -27,6 +27,6 @@ jobs:
     #   run: |
     #     python sorting.py
         
-     - name: Run date_update script
-       run: |
-         python date_updater.py
+    - name: Run date_update script
+      run: |
+        python date_updater.py
