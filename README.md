@@ -1,8 +1,8 @@
 # XFiLM.github.io
 
-- change header font
-- add quotes
+- edit quotes
 - add tickets for quotes
 - add last table
 - edit online?
-- re[p]air sort
+- change 1st column font
+- change 1st column font color (equalize)
