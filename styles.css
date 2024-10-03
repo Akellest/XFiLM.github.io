@@ -14,36 +14,8 @@
 
 @font-face {
     font-family: 'AdobeJenson';
-    src: url('fonts/AJensonPro-Lt.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'AdobeJenson';
-    src: url('fonts/AJensonPro-LtIt.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'AdobeJenson';
     src: url('fonts/AJensonPro-Semibold.ttf') format('truetype');
     font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'AdobeJenson';
-    src: url('fonts/AJensonPro-SemiboldIt.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'SPQR';
-    src: url('fonts/spq.ttf') format('truetype');
-    font-weight: normal;
     font-style: normal;
 }
 
@@ -82,6 +54,56 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'TeXGyreCursor';
+    src: url('fonts/TeXGyreCursor.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TeXGyreCursor';
+    src: url('fonts/TeXGyreCursor-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Hanuman';
+    src: url('fonts/Hanuman.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NocturneSerif';
+    src: url('fonts/NocturneSerif.otf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'APL386';
+    src: url('fonts/APL386.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RomanGridCaps';
+    src: url('fonts/RomanGridCaps.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*less readable but attractive*/
+@font-face {
+    font-family: 'Hina-Mincho';
+    src: url('fonts/Hina-Mincho.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
 	background-color: #010101;
 }
@@ -91,6 +113,10 @@ body {
     font-family: 'TwCenMTStd', sans-serif;
 	font-size: 28px;
 	margin-bottom: 20px; 
+}
+
+.prescript-roman {
+	font-family: 'RomanGridCaps';
 }
 
 .prescript-Creasy {
@@ -129,7 +155,8 @@ body {
 }
 
 .english {
-    font-family: 'AdobeJenson', sans-serif;
+    font-family: 'Hina-Mincho', sans-serif;
+	font-size: 30px !important;
     font-weight: bold;
     font-style: normal;
 }
@@ -162,6 +189,12 @@ body {
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis;
+}
+
+.first-column {
+    font-family: 'NocturneSerif';
+    font-weight: bold;
+    font-style: normal;
 }
 
 .first-column, .first-column-header {

@@ -1,7 +1,7 @@
 import os
 import re
 from datetime import datetime
-from bs4 import BeautifulSoup  # Импортируем библиотеку для работы с HTML
+from bs4 import BeautifulSoup
 
 directory_path = os.path.join('html')
 
