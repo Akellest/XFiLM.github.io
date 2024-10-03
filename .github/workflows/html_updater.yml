@@ -19,14 +19,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt 
 
-    # - name: Run HTML updater script
-    #   run: |
-    #     python br_updater.py
+    - name: Run HTML updater script
+      run: |
+        python br_updater.py
 
     - name: Run sorting script
       run: |
         python sorting.py
         
-    #- name: Run date_update script
-    #  run: |
-    #    python date_updater.py
+    - name: Run date_update script
+      run: |
+        python date_updater.py

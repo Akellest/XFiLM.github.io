@@ -7,7 +7,10 @@ def sort_table_by_first_column(soup):
     rows = table.find_all('tr')
 
     def sort_key(row):
-        first_column_text = row.find('td', class_='first-column').text.strip()
+        first_column = row.find('td', class_='first-column')
+        if first_column is None:
+            return (float('inf'), '')  # Переместить такие строки в конец
+        first_column_text = first_column.text.strip()
         if re.match(r'^\d+', first_column_text):
             return (0, first_column_text)
         elif re.match(r'^[а-яА-Я]', first_column_text):
@@ -34,11 +37,17 @@ def update_html_file(filename):
 
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(str(soup))
-    if filename == "table3.html":
-        print(filename)
+    
+    if filename.endswith("table3.html"):
+        with open(filename, 'r', encoding='utf-8') as file:
+            html_content = file.read()
+            # Выводим последние 200 символов
+            print(f"Последние 200 символов в файле '{filename}':")
+            print(html_content[-200:])
+
     print(f"Таблица отсортирована в файле '{filename}'.")
 
-html_files = [f for f in os.listdir('html') if f.endswith('.html') and f.startswith('table') and f != 'table-header.html']
+html_files = [f for f in os.listdir('html') if f.endswith('.html') and f.startswith('table')]
 print(f"Найдено HTML файлов: {len(html_files)}")
 print(html_files)
 
@@ -47,3 +56,6 @@ if not html_files:
 else:
     for html_file in html_files:
         update_html_file(os.path.join('html', html_file))
+
+        
+input()
