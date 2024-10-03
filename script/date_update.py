@@ -7,11 +7,12 @@ directory_path = os.path.join('html')
 latest_file = None
 latest_time = 0
 
+# Получаем список всех HTML файлов в указанной директории
 html_files = [f for f in os.listdir(directory_path) if f.endswith('.html')]
 print(f"Найдено HTML файлов: {len(html_files)}")
 print(html_files)
 
-
+# Находим последний измененный файл
 for filename in os.listdir(directory_path):
     file_path = os.path.join(directory_path, filename)
     
@@ -26,23 +27,12 @@ if latest_file:
     last_modified_date = datetime.fromtimestamp(latest_time).strftime('%d.%m.%Y')
     print(f'Последний измененный файл: {latest_file}')
     print(f'Дата последнего изменения: {last_modified_date}')
-    
-<<<<<<< HEAD
-    with open('html/prescriptum.html', 'r+', encoding='utf-8') as html_file:
-        content = html_file.read()
-	print(html_file)
-        
-        updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
-        print(f"content: {content}")
-        print(f"updated_content: {updated_content}")
-        
-        html_file.seek(0)
-        html_file.write(updated_content)
-        html_file.truncate()
-=======
+
     try:
+        # Открываем файл prescriptum.html для редактирования
         with open('html/prescriptum.html', 'r+', encoding='utf-8') as html_file:
             content = html_file.read()
+            print("html_file: {html_file}")
             
             # Заменяем дату в контенте
             updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
@@ -60,7 +50,7 @@ if latest_file:
                 print("Нет изменений в контенте.")
     except Exception as e:
         print(f"Произошла ошибка при записи в файл: {e}")
->>>>>>> d08a011c4c6b12a102eef382bea5f42244b4ae26
 else:
     print('Нет файлов в директории.')
-input()
+
+input("Нажмите Enter для выхода...")
