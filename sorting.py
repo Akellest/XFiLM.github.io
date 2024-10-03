@@ -37,7 +37,14 @@ def update_html_file(filename):
 
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(str(soup))
-
+    
+    if filename.endswith("table3.html"):
+        with open(filename, 'r', encoding='utf-8') as file:
+            html_content = file.read()
+            # Выводим последние 200 символов
+            print(f"Последние 200 символов в файле '{filename}':")
+            print(html_content[-200:])
+    
     print(f"Таблица отсортирована в файле '{filename}'.")
 
 html_files = [f for f in os.listdir('html') if f.endswith('.html') and f.startswith('table')]
