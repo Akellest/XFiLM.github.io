@@ -21,12 +21,12 @@ jobs:
 
     - name: Run HTML updater script
       run: |
-        python script/br_updater.py
+        python /br_updater.py
 
     - name: Run sorting script
       run: |
-        python script/sorting.py
+        python /sorting.py
         
     - name: Run date_update script
       run: |
-        python script/date_update.py
+        python /date_update.py
