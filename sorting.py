@@ -58,7 +58,6 @@ if not html_files:
 else:
     for html_file_path in html_files:
         html_file = os.path.join(directory_path, html_file_path)
-        print(html_file)
         update_html_file(html_file)
 
 
