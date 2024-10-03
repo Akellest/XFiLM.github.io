@@ -27,15 +27,25 @@ if latest_file:
     print(f'Последний измененный файл: {latest_file}')
     print(f'Дата последнего изменения: {last_modified_date}')
     
-    with open('html/prescriptum.html', 'r+', encoding='utf-8') as html_file:
-        content = html_file.read()
-        
-        updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
-        print(f"content: {content}")
-        print(f"updated_content: {updated_content}")
-        
-        html_file.seek(0)
-        html_file.write(updated_content)
-        html_file.truncate()
+    try:
+        with open('html/prescriptum.html', 'r+', encoding='utf-8') as html_file:
+            content = html_file.read()
+            
+            # Заменяем дату в контенте
+            updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
+
+            # Проверяем, были ли изменения
+            if updated_content != content:
+                print(f"content: {content}")
+                print(f"updated_content: {updated_content}")
+
+                # Перезаписываем файл
+                html_file.seek(0)  # Перемещаем указатель в начало файла
+                html_file.write(updated_content)  # Записываем обновленный контент
+                html_file.truncate()  # Обрезаем файл, если обновленный контент короче
+            else:
+                print("Нет изменений в контенте.")
+    except Exception as e:
+        print(f"Произошла ошибка при записи в файл: {e}")
 else:
     print('Нет файлов в директории.')
