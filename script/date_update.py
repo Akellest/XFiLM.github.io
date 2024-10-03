@@ -2,7 +2,7 @@ import os
 import re
 from datetime import datetime
 
-directory_path = os.path.join('..', 'html')
+directory_path = os.path.join('', 'html')
 
 latest_file = None
 latest_time = 0
