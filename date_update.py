@@ -31,32 +31,17 @@ if latest_file:
 
     html_file_path = os.path.join(directory_path, 'prescriptum.html')
 
-    # Читаем содержимое оригинального файла
-    with open(html_file_path, 'r', encoding='utf-8') as file:
-        content = file.read()
+    # Читаем содержимое оригинального файла в режиме r+
+    with open(html_file_path, 'r+', encoding='utf-8') as html_file:
+        content = html_file.read()
         
-        # Заменяем дату в контенте
+        # Используем регулярное выражение для замены только второй даты
         updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
-
-        print(f"content: {content}")
-        print(f"updated_content: {updated_content}")
-
-    # Удаляем оригинальный файл
-    os.remove(html_file_path)
-    print(f"Удален файл: {html_file_path}")
-
-    # Создаем новый файл с обновленным контентом
-    with open(html_file_path, 'w', encoding='utf-8') as file:
-        file.write(updated_content)  # Записываем обновленный контент
-
-    # Проверяем содержимое нового файла
-    with open(html_file_path, 'r', encoding='utf-8') as file:
-        final_content = file.read()
-        print("Содержимое файла после изменений:")
-        print(final_content)
-    
-        print(f"file: {file}")
-        print(f"listdir: {os.listdir(directory_path)}")
-    
+        
+        # Перемещаем указатель в начало файла и записываем обновленный контент
+        html_file.seek(0)  # Перемещение указателя в начало
+        html_file.write(updated_content)  # Запись обновленного контента
+        html_file.truncate()  # Обрезка файла, если новый контент короче
+            
 else:
     print('Нет файлов в директории.')
