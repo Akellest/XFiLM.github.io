@@ -32,7 +32,7 @@ if latest_file:
         # Открываем файл prescriptum.html для редактирования
         with open('html/prescriptum.html', 'r+', encoding='utf-8') as html_file:
             content = html_file.read()
-            print("html_file: {html_file}")
+            print(f"html_file: {html_file}")
             
             # Заменяем дату в контенте
             updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
