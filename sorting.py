@@ -34,7 +34,8 @@ def update_html_file(filename):
 
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(str(soup))
-
+    if filename == "table3.html":
+        print(filename)
     print(f"Таблица отсортирована в файле '{filename}'.")
 
 html_files = [f for f in os.listdir('html') if f.endswith('.html') and f.startswith('table') and f != 'table-header.html']
