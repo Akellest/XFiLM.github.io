@@ -35,28 +35,11 @@ if latest_file:
     with open(html_file_path, 'r', encoding='utf-8') as file:
         content = file.read()
         
-        # Заменяем дату в контенте
         updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
-
-        print(f"content: {content}")
-        print(f"updated_content: {updated_content}")
-
-    # Удаляем оригинальный файл
-    os.remove(html_file_path)
-    print(f"Удален файл: {html_file_path}")
-
-    # Создаем новый файл с обновленным контентом
-    with open(html_file_path, 'w', encoding='utf-8') as file:
-        file.write(updated_content)  # Записываем обновленный контент
-
-    # Проверяем содержимое нового файла
-    with open(html_file_path, 'r', encoding='utf-8') as file:
-        final_content = file.read()
-        print("Содержимое файла после изменений:")
-        print(final_content)
-    
-        print(f"file: {file}")
-        print(f"listdir: {os.listdir(directory_path)}")
+        
+        html_file.seek(0)
+        html_file.write(updated_content)
+        html_file.truncate()
     
 else:
     print('Нет файлов в директории.')
