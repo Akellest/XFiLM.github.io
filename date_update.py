@@ -31,16 +31,17 @@ if latest_file:
 
     html_file_path = os.path.join(directory_path, 'prescriptum.html')
 
-    # Читаем содержимое оригинального файла
-    with open(html_file_path, 'r', encoding='utf-8') as html_file:
+    # Читаем содержимое оригинального файла в режиме r+
+    with open(html_file_path, 'r+', encoding='utf-8') as html_file:
         content = html_file.read()
         
         # Используем регулярное выражение для замены только второй даты
         updated_content = re.sub(r'(\d{2}\.\d{2}\.\d{4})\s*—\s*(\d{2}\.\d{2}\.\d{4})', r'\1 — ' + last_modified_date, content)
         
-        html_file.seek(0)
-        html_file.write(updated_content)
-        html_file.truncate()        
-    
+        # Перемещаем указатель в начало файла и записываем обновленный контент
+        html_file.seek(0)  # Перемещение указателя в начало
+        html_file.write(updated_content)  # Запись обновленного контента
+        html_file.truncate()  # Обрезка файла, если новый контент короче
+            
 else:
     print('Нет файлов в директории.')
