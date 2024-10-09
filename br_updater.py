@@ -1,5 +1,4 @@
 import os
-import numpy as np
 from bs4 import BeautifulSoup
 
 def update_html_file(filepath):
@@ -8,6 +7,7 @@ def update_html_file(filepath):
 
     soup = BeautifulSoup(html_content, 'html.parser')
 
+    # Обработка ссылок
     for link in soup.find_all('a'):
         link_text = link.text
         parts = link_text.split('/Slash/')
@@ -25,6 +25,7 @@ def update_html_file(filepath):
 
         link.replace_with(new_content)
 
+    # Очистка пустых ячеек таблиц
     for tr in soup.find_all('tr'):
         second_column = tr.find_all('td')[1] if len(tr.find_all('td')) > 1 else None
         if second_column:
@@ -36,6 +37,20 @@ def update_html_file(filepath):
             if fifth_column.text.strip() in ["None", "nan"]:
                 fifth_column.clear()
 
+    # Обработка ячеек с классом "third-column"
+    for td in soup.find_all('td', class_='third-column'):
+        if '/Slash/' in td.text:
+            parts = td.text.split('/Slash/')
+            new_content = BeautifulSoup("", 'html.parser')
+            for i, part in enumerate(parts):
+                new_content.append(part.strip())
+                if i < len(parts) - 1:
+                    new_content.append(soup.new_tag('br'))
+                    new_content.append('/')
+                    new_content.append(soup.new_tag('br'))
+            td.clear()
+            td.append(new_content)
+
     with open(filepath, 'w', encoding='utf-8') as file:
         file.write(str(soup))
 
@@ -43,7 +58,7 @@ def update_html_file(filepath):
 
 html_directory = os.path.join('html')
 
-html_files = [os.path.join(html_directory, f) for f in os.listdir(html_directory) 
+html_files = [os.path.join(html_directory, f) for f in os.listdir(html_directory)
               if f.endswith('.html') and f not in ['index.html', 'table-header.html', '404.html']]
 
 print(f"Найдено HTML файлов: {len(html_files)}")
