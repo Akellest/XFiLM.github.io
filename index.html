@@ -66,7 +66,7 @@
 
         // Основная функция для объединения таблиц
         async function combineTables() {
-            const tableFiles = ['table-header.html', 'quote0.html', 'table1.html', 'quote1.html', 'table2.html', 'quote2.html', 'table3.html', 'quote3.html', 'table4.html'];
+            const tableFiles = ['table-header.html', 'quote0.html', 'table1.html', 'quote1.html', 'table2.html', 'quote2.html', 'table3.html', 'quote3.html', 'table4.html', 'quote4.html'];
             const tablePromises = tableFiles.map(loadTable);
 
             const tables = await Promise.all(tablePromises);

@@ -96,6 +96,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Bakemono';
+    src: url('fonts/Bakemono.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*less readable but attractive*/
 @font-face {
     font-family: 'Hina-Mincho';
@@ -154,6 +161,11 @@ body {
 	font-size: 24px;
 }
 
+.second-column img {
+    width: 50%;
+    height: auto;
+}
+
 .english {
     font-family: 'Hina-Mincho', sans-serif;
 	font-size: 30px !important;
@@ -192,8 +204,11 @@ body {
 }
 
 .first-column {
-    font-family: 'NocturneSerif';
+    /*font-family: 'NocturneSerif';
     font-weight: bold;
+    font-style: normal;*/
+	font-family: 'Bakemono';
+    font-weight: normal;
     font-style: normal;
 }
 
@@ -226,7 +241,6 @@ body {
 	font-family: 'b52', sans-serif;
 	background-color: #f3f3f3;
 	display: inline;
-	border-radius: 4px;
 }
 
 .quote0 td {
@@ -285,6 +299,15 @@ body {
     text-decoration: underline;
 }
 
+.quote2 td {
+    border-color: #CEE2F3;
+	border-width: 3px;
+}
+
+.quote2 tr:last-child td {
+    border-bottom: none;
+}
+
 .table3 td {
     color: #FF9900;
     border-color: #4986E8;
@@ -300,6 +323,15 @@ body {
     text-decoration: underline;
 }
 
+.quote3 td {
+    border-color: #CEE2F3;
+	border-width: 3px;
+}
+
+.quote3 tr:last-child td {
+    border-bottom: none;
+}
+
 .table4 td {
     color: #FF9900;
     border-color: #4986E8;
@@ -313,4 +345,13 @@ body {
 .table4 td a:hover {
     color: #FF9900;
     text-decoration: underline;
+}
+
+.quote4 td {
+    border-color: #CEE2F3;
+	border-width: 3px;
+}
+
+.quote4 tr:last-child td {
+    border-bottom: none;
 }
