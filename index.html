@@ -130,6 +130,24 @@
                 link.setAttribute('rel', 'noopener noreferrer'); // Для безопасности
             });
         });
+		
+		// Lazy loading для изображений
+		document.addEventListener("DOMContentLoaded", () => {
+			const lazyImages = document.querySelectorAll("img.lazy-image");
+			const observer = new IntersectionObserver(entries => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target;
+						img.src = img.dataset.src;
+						img.removeAttribute("data-src");
+						observer.unobserve(img);
+					}
+				});
+			}, { rootMargin: "0px 0px 200px 0px" });
+
+			lazyImages.forEach(img => observer.observe(img));
+		});
+
     </script>
 
     <div id="combinedTables"></div>
