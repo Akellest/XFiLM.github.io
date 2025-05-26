@@ -2,7 +2,7 @@ import os
 import string
 from bs4 import BeautifulSoup
 
-digits = "0123456789"
+digits = " 0123456789"
 letters = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz"
 
 all_ascii = string.printable
