@@ -6,55 +6,66 @@ digits = " 0123456789"
 letters = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz"
 
 all_ascii = string.printable
-middle_chars = ''.join(ch for ch in all_ascii if ch not in digits and ch not in letters)
+middle_chars = ''.join(ch for ch in all_ascii if ch not in digits and ch not in letters and ch != ' ')
 
 CUSTOM_ORDER = digits + middle_chars + letters
 order_map = {ch: i for i, ch in enumerate(CUSTOM_ORDER)}
 
+def char_key(ch):
+    # Возвращаем индекс символа в order_map или очень большое число, если символ неизвестен
+    return order_map.get(ch, len(order_map) + ord(ch))
+
+def sort_key(row):
+    first_col = next((td for td in row.find_all('td') if 'first-column' in td.get('class', [])), None)
+    if first_col is None:
+        return [float('inf')]
+    link = first_col.find('a')
+    if link:
+        text = link.text.strip().lower()
+    else:
+        text = first_col.text.strip().lower()
+    if not text:
+        return [float('inf')]
+    key = [char_key(ch) for ch in text]
+    print(f"Сортировочный ключ для '{text}': {key}")
+    return key
+
+
 def sort_table_by_first_column(soup):
     table = soup.find('table')
-    rows = table.find_all('tr')
-    headers = rows.pop(0)  # Заголовки
+    if table is None:
+        print("Таблица не найдена в файле.")
+        return
 
-    def sort_key(row):
-        first_column = row.find('td', class_='first-column')
-        if first_column is None:
-            return [float('inf')]
-        text = first_column.text.strip().lower()
-        if not text:
-            return [float('inf')]
-        # Ключ — список индексов символов в CUSTOM_ORDER
-        return [order_map.get(ch, len(order_map)) for ch in text]
+    rows = table.find_all('tr')
+    if not rows:
+        return
+
+    # Проверяем, есть ли заголовок (строка с <th>)
+    first_row = rows[0]
+    if first_row.find('th'):
+        headers = rows.pop(0)
+    else:
+        headers = None  # Заголовка нет
 
     sorted_rows = sorted(rows, key=sort_key)
 
     new_table = BeautifulSoup("<table></table>", 'html.parser').table
-    new_table.append(headers)
+    if headers:
+        new_table.append(headers)
     for row in sorted_rows:
         new_table.append(row)
     table.replace_with(new_table)
 
-def update_html_file(filename):
-    with open(filename, 'r', encoding='utf-8') as file:
-        html_content = file.read()
 
-    soup = BeautifulSoup(html_content, 'html.parser')
+def update_html_file(filepath):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    soup = BeautifulSoup(content, 'html.parser')
     sort_table_by_first_column(soup)
 
-    with open(filename, 'w', encoding='utf-8') as file:
-        file.write(str(soup))
-    
-    print(f"Таблица отсортирована в файле '{filename}'.")
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(str(soup))
 
-html_files = [f for f in os.listdir('html') if f.endswith('.html') and f.startswith('table')]
-print(f"Найдено HTML файлов: {len(html_files)}")
-print(html_files)
-
-directory_path = os.path.join('html')
-
-if not html_files:
-    print("Не найдено HTML файлов для обработки.")
-else:
-    for html_file_path in html_files:
-        html_file = os.path.join(directory_path, html_file_path)
-        update_html_file(html_file)
+    print(f"Таблица отсортирована в '{filepath}'")
