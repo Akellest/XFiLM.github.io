@@ -1,17 +1,11 @@
 import os
-import re
 import string
 from bs4 import BeautifulSoup
 
-# Определяем порядок символов
 digits = "0123456789"
-letters = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz" \
-          "АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя"
+letters = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz"
 
-# Все печатные ASCII символы
 all_ascii = string.printable
-
-# Остальные символы, которых нет в digits и letters
 middle_chars = ''.join(ch for ch in all_ascii if ch not in digits and ch not in letters)
 
 CUSTOM_ORDER = digits + middle_chars + letters
@@ -25,13 +19,12 @@ def sort_table_by_first_column(soup):
     def sort_key(row):
         first_column = row.find('td', class_='first-column')
         if first_column is None:
-            return (float('inf'), '')
-        text = first_column.text.strip()
+            return [float('inf')]
+        text = first_column.text.strip().lower()
         if not text:
-            return (float('inf'), '')
-        first_char = text[0]
-        priority = order_map.get(first_char, len(order_map))
-        return (priority, text.lower())
+            return [float('inf')]
+        # Ключ — список индексов символов в CUSTOM_ORDER
+        return [order_map.get(ch, len(order_map)) for ch in text]
 
     sorted_rows = sorted(rows, key=sort_key)
 
