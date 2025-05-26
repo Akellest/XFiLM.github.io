@@ -21,21 +21,17 @@ def char_key(ch):
     return order_map.get(ch, len(order_map) + ord(ch))
 
 def sort_key(row):
-    # находим <td> с классом first-column (даже если несколько классов)
     first_col = next(
         (td for td in row.find_all('td') if 'first-column' in td.get('class', [])),
         None
     )
     if first_col is None:
         return [float('inf')]
-    # вытаскиваем текст из <a> или из ячейки
     link = first_col.find('a')
     text = (link.text if link else first_col.text).strip().lower()
     if not text:
         return [float('inf')]
-    key = [char_key(ch) for ch in text]
-    print(f"Сортировочный ключ для '{text}': {key}")
-    return key
+    return [char_key(ch) for ch in text]
 
 def sort_table_by_first_column(soup):
     table = soup.find('table')
