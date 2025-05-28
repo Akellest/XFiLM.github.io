@@ -48,13 +48,6 @@
 }
 
 @font-face {
-    font-family: 'Platypi';
-    src: url('fonts/Platypi-Light.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'TeXGyreCursor';
     src: url('fonts/TeXGyreCursor.ttf') format('truetype');
     font-weight: normal;
@@ -203,7 +196,7 @@ body {
 }
 
 .table-group {
-    margin-bottom: 40px; /* отступ между блоками */
+    margin-bottom: 40px;
 }
 
 .first-column {
@@ -240,11 +233,14 @@ body {
 }
 
 .quote-text {
-	font-size: 30px;
-	font-family: 'b52', sans-serif;
-	background-color: #f3f3f3;
-	display: inline;
+    font-size: 30px;
+    font-family: 'b52', sans-serif;
+    background-color: #f3f3f3;
+    display: inline-block;
+    border-radius: 12px;
+    padding: 5px 10px;
 }
+
 
 .quote1 td {
     border-color: #CEE2F3;
@@ -261,23 +257,49 @@ body {
 }
 
 .table1 td {
-    border-color: #2A3B57;
-	color: #CCE0F1; 
+  position: relative;
+  background: #010101;
+  color: #f0f8ff;
+  z-index: 0;
+  border: none;
 }
 
+.table1 td::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: -1px;
+  background: linear-gradient(90deg, #6a5acd, #4433ae, #120a8f, #b4007b, #fc2847);
+  background: linear-gradient(90deg, #f0f8ff, #120a8f, #fc2847);
+  z-index: -1;
+  border-radius: 0;
+}
+
+.table1 td::after {
+  content: "";
+  position: absolute;
+  top: 1px; left: 1px; right: 1px; bottom: 1px;
+  background: #010101;
+  z-index: -1;
+}
+
+
 .table1 td a {
-    color: #CCE0F1;
+    color: #f0f8ff;
     text-decoration: none;
 }
 
 .table1 td a:hover {
-    color: #1CE0F1;
-    text-decoration: underline;
+  background: linear-gradient(90deg, #6a5acd, #4433ae, #120a8f, #b4007b, #fc2847);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: underline;
 }
 
-/*.table1 tr:last-child td {
-    border-bottom: none;
-}*/
+
+.table1 tr:first-child td {
+    border-top: none;
+}
 
 .quote2 td {
     border-color: #CEE2F3;
@@ -294,17 +316,17 @@ body {
 }
 
 .table2 td {
-	color: #D91919;
-    border-color: #CEE2F3;
+	color: #F2F9FF;
+    border-color: #D91919;
 }
 
 .table2 td a {
-    color: #D91919;
+    color: #F2F9FF;
     text-decoration: none;
 }
 
 .table2 td a:hover {
-    color: #1CE0F1;
+    color: #D91919;
     text-decoration: underline;
 }
 
@@ -327,17 +349,17 @@ body {
 }
 
 .table3 td {
-	color: #E6E6FA;
+	color: #F2F9FF;
     border-color: #B87333;
 }
 
 .table3 td a {
-    color: #E6E6FA;
+    color: #F2F9FF;
     text-decoration: none;
 }
 
 .table3 td a:hover {
-    color: #FF9900;
+    color: #B87333;
     text-decoration: underline;
 }
 
@@ -360,17 +382,17 @@ body {
 }
 
 .table4 td {
-    color: #B87333;
-    border-color: #3A3A3A;
+    color: #F2F9FF;
+    border-color: #478C41;
 }
 
 .table4 td a {
-    color: #B87333;
+    color: #F2F9FF;
     text-decoration: none;
 }
 
 .table4 td a:hover {
-    color: #1B4D3E;
+    color: #478C41;
     text-decoration: underline;
 }
 
@@ -391,3 +413,5 @@ body {
     border-top: none;
 	border-bottom: none;
 }
+
+/*border-color: #bd007e;     ???    for 5th*/
