@@ -129,6 +129,10 @@ body {
 }
 
 .table, .table-header {
+	table-layout: fixed;
+	word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
     border-collapse: collapse;
     width: 85%;
 	margin: 0 auto;
@@ -198,6 +202,10 @@ body {
     text-overflow: ellipsis;
 }
 
+.table-group {
+    margin-bottom: 40px; /* отступ между блоками */
+}
+
 .first-column {
     /*font-family: 'NocturneSerif';
     font-weight: bold;
@@ -238,17 +246,16 @@ body {
 	display: inline;
 }
 
-.quote0 td {
-    border-color: #2A3B57;
+.quote1 td {
+    border-color: #CEE2F3;
 	border-width: 3px;
 }
 
-.quote0 tr:first-child td {
-    border-top: none;
+.quote1 tr:first-child td {
 	border-bottom: none;
 }
 
-.quote0 tr:last-child td {
+.quote1 tr:last-child td {
     border-top: none;
     border-bottom: none;
 }
@@ -268,20 +275,20 @@ body {
     text-decoration: underline;
 }
 
-.table1 tr:last-child td {
+/*.table1 tr:last-child td {
     border-bottom: none;
-}
+}*/
 
-.quote1 td {
+.quote2 td {
     border-color: #CEE2F3;
 	border-width: 3px;
 }
 
-.quote1 tr:first-child td {
+.quote2 tr:first-child td {
 	border-bottom: none;
 }
 
-.quote1 tr:last-child td {
+.quote2 tr:last-child td {
     border-top: none;
 	border-bottom: none;
 }
@@ -301,20 +308,20 @@ body {
     text-decoration: underline;
 }
 
-.table2 tr:last-child td {
-    border-bottom: none;
+.table2 tr:first-child td {
+    border-top: none;
 }
 
-.quote2 td {
-    border-color: #8F82CC;
+.quote3 td {
+    border-color: #CEE2F3;
 	border-width: 3px;
 }
 
-.quote2 tr:first-child td {
+.quote3 tr:first-child td {
 	border-bottom: none;
 }
 
-.quote2 tr:last-child td {
+.quote3 tr:last-child td {
     border-top: none;
 	border-bottom: none;
 }
@@ -334,20 +341,20 @@ body {
     text-decoration: underline;
 }
 
-.table3 tr:last-child td {
-    border-bottom: none;
+.table3 tr:first-child td {
+    border-top: none;
 }
 
-.quote3 td {
+.quote4 td {
     border-color: #CEE2F3;
 	border-width: 3px;
 }
 
-.quote3 tr:first-child td {
+.quote4 tr:first-child td {
 	border-bottom: none;
 }
 
-.quote3 tr:last-child td {
+.quote4 tr:last-child td {
     border-top: none;
 	border-bottom: none;
 }
@@ -367,16 +374,20 @@ body {
     text-decoration: underline;
 }
 
-.quote4 td {
+.table4 tr:first-child td {
+    border-top: none;
+}
+
+.quote5 td {
     border-color: #CEE2F3;
 	border-width: 3px;
 }
 
-.quote4 tr:first-child td {
+.quote5 tr:first-child td {
 	border-bottom: none;
 }
 
-.quote4 tr:last-child td {
+.quote5 tr:last-child td {
     border-top: none;
 	border-bottom: none;
 }

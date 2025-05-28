@@ -66,24 +66,33 @@
 
         // Основная функция для объединения таблиц
         async function combineTables() {
-            const tableFiles = ['table-header.html', 'quote0.html', 'table1.html', 'quote1.html', 'table2.html', 'quote2.html', 'table3.html', 'quote3.html', 'table4.html', 'quote4.html'];
-            const tablePromises = tableFiles.map(loadTable);
+			const groups = [
+				['quote1.html', 'table-header.html', 'table1.html'],
+				['quote2.html', 'table-header.html', 'table2.html'],
+				['quote3.html', 'table-header.html', 'table3.html'],
+				['quote4.html', 'table-header.html', 'table4.html']
+			];
 
-            const tables = await Promise.all(tablePromises);
-            const combinedContent = tables.join(''); // Объединяем таблицы без отступов
-            document.getElementById('combinedTables').innerHTML = combinedContent; // Вставляем в нужный элемент
+			let combinedContent = '';
 
-            document.querySelectorAll('.third-column').forEach(cell => {
-                // Проверяем, содержит ли ячейка русские символы
-                if (/[а-яА-ЯЁё]/.test(cell.textContent)) {
-                    cell.classList.add('russian'); // Если содержит русский текст, добавляем класс для русского шрифта
-                } else {
-                    cell.classList.add('english'); // Иначе добавляем класс для английского шрифта
-                }
-            });
+			for (const group of groups) {
+				const tablePromises = group.map(loadTable);
+				const tables = await Promise.all(tablePromises);
+				combinedContent += `<div class="table-group">${tables.join('')}</div>`;
+			}
 
-            addHoverEffect();
-        }
+			document.getElementById('combinedTables').innerHTML = combinedContent;
+
+			document.querySelectorAll('.third-column').forEach(cell => {
+				if (/[а-яА-ЯЁё]/.test(cell.textContent)) {
+					cell.classList.add('russian');
+				} else {
+					cell.classList.add('english');
+				}
+			});
+
+			addHoverEffect();
+		}
 
         function addHoverEffect() {
             const tooltip = document.getElementById('tooltip');
