@@ -69,13 +69,6 @@
 }
 
 @font-face {
-    font-family: 'Hanuman';
-    src: url('fonts/Hanuman.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'NocturneSerif';
     src: url('fonts/NocturneSerif.otf') format('truetype');
     font-weight: bold;
@@ -96,10 +89,16 @@
     font-style: normal;
 }
 
-/*less readable but attractive*/
 @font-face {
-    font-family: 'Hina-Mincho';
-    src: url('fonts/Hina-Mincho.ttf') format('truetype');
+    font-family: 'BlackBeard';
+    src: url('fonts/BlackBeard.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TypewriterSpool';
+    src: url('fonts/TypewriterSpoolRUFRg-Regular.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -160,15 +159,18 @@ body {
 }
 
 .english {
-    font-family: 'NocturneSerif', sans-serif;
+    /*font-family: 'NocturneSerif', sans-serif;*/
+	font-family: 'TypewriterSpool', sans-serif;
 	font-size: 32px !important;
     font-weight: normal;
     font-style: normal;
 }
 
 .russian {
-	font-family: 'agbengalyc', sans-serif;
-	font-size: 25px !important;
+	/*font-family: 'agbengalyc', sans-serif;
+	font-size: 25px !important;*/
+	font-family: 'TypewriterSpool', sans-serif;
+	font-size: 32px !important;
     font-weight: normal;
     font-style: normal;
 }
