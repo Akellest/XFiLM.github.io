@@ -269,7 +269,6 @@ body {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   margin: -1px;
-  background: linear-gradient(90deg, #6a5acd, #4433ae, #120a8f, #b4007b, #fc2847);
   background: linear-gradient(90deg, #f0f8ff, #120a8f, #fc2847);
   z-index: -1;
   border-radius: 0;
@@ -290,7 +289,7 @@ body {
 }
 
 .table1 td a:hover {
-  background: linear-gradient(90deg, #6a5acd, #4433ae, #120a8f, #b4007b, #fc2847);
+  background: linear-gradient(90deg, #f0f8ff, #120a8f, #fc2847);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: underline;
